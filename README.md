@@ -3,6 +3,12 @@
 Django Projektarbeit
 VS Code und PyCharm
 
+Guidelines:
+
+Projektsprache: Englisch
+One Task, one Branch
+Tasks 
+
 
 Must-Haves:
 
