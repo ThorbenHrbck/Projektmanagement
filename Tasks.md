@@ -33,11 +33,11 @@ ToDos:
    - https://python.plainenglish.io/how-to-implement-role-based-access-control-rbac-in-django-a-step-by-step-guide-31c5e4053868)
 
 
-2. Create Datamodel for tasks and projects (C)
+2. Create Datamodel for tasks and projects (C) Steffi
 
    - projects include tasks, times, notes
    - no task without project
    - relation between tasks/projects and roles is defined
-  
+   - ToDo: review please 
 
 
