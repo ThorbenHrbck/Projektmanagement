@@ -1,10 +1,17 @@
 from datetime import date, timedelta
-
 from django.db import models
-# ToDo: correct following imports
-from django.db.models import Manager
-from django.contrib.auth.models import User
 
+#----------------------------------------------------------------------------------------------------------
+
+class User(models.Model):
+    firstName = models.CharField(max_length=50, null=True)
+    lastName = models.CharField(max_length=100, null=True)
+    role = models.CharField(max_length=50)
+    workhours = models.IntegerField(null=True)
+    def __str__(self):
+        return self.firstName + ' ' + self.lastName
+
+#----------------------------------------------------------------------------------------------------------
 
 class Project(models.Model):
     name = models.CharField(max_length=100)
@@ -12,9 +19,10 @@ class Project(models.Model):
     end_date = models.DateField(null=True, blank=True)
     last_changed = models.DateField(default=start_date, null=True, blank=True)
     notes = models.TextField(null=True, blank=True)
-    owner = models.ForeignKey(Manager, on_delete=models.DO_NOTHING)
+    owner = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     def __str__(self):
         return self.name
+
 
 class Task(models.Model):
     name = models.CharField(max_length=100)
@@ -27,6 +35,7 @@ class Task(models.Model):
     def __str__(self):
         return self.name
 
+#----------------------------------------------------------------------------------------------------------
 class Sprint(models.Model):
     name = models.CharField(max_length=100)
     start_date = models.DateField(null=False, blank=True)
@@ -58,5 +67,4 @@ class Sprint(models.Model):
             if current_date.weekday() < 5:  # Monday=0, Sunday=6
                 workdays += 1
             current_date += timedelta(days=1)
-
         return workdays * 8 # 8-Hour Days
