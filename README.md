@@ -28,3 +28,6 @@ Nice-To-Haves
     Sprints
     Ein Basetemplate (z.B. ein Corporate Design) haben
 
+Admin User details:
+    name: admin
+    pw: Admin123456
