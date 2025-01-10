@@ -8,7 +8,7 @@ class Project(models.Model):
     name = models.CharField(max_length=100)
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
-    last_changed = models.DateField(default=start_date)
+    last_changed = models.DateField(default=start_date, null=True, blank=True)
     notes = models.TextField(null=True, blank=True)
     owner = models.ForeignKey(Manager, on_delete=models.DO_NOTHING)
     def __str__(self):
