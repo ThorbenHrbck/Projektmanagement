@@ -19,7 +19,6 @@ Task done?:
 A: Three roles with different Permissions: Projectmanager, User, Admin (User can mark tasks as done,
 Admins can assign/change rights to users and managers, User can be assigned to projects by manager)
 
-
 B: Project can be created, changed and deleted
 
 C: A project has a name and includes tasks, times (Start/End etc.), and notes in a seperate field
@@ -38,6 +37,11 @@ ToDos:
    - projects include tasks, times, notes
    - no task without project
    - relation between tasks/projects and roles is defined
-   - ToDo: review please 
 
+3. Create Datamodel for Sprints
+   
+   - Sprint has a name
+   - Sprint has a start and end date 
+   - Sprint containes null to many tasks
+   - Sprint is done, when end date in past
 
