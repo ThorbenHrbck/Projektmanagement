@@ -1,7 +1,8 @@
-from datetime import date, timedelta
 from django.db import models
+from datetime import date, timedelta
 
 #----------------------------------------------------------------------------------------------------------
+
 
 class User(models.Model):
     firstName = models.CharField(max_length=255, null=True)
