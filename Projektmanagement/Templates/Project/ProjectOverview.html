@@ -1,0 +1,42 @@
+<!-- Projektübersicht -->
+<!-- templates/project_overview.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Projektübersicht</h1>
+    <div class="row">
+        <!-- Dropdown-Menü für Filter oder Aktionen -->
+        <div class="col-md-4">
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Optionen
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{% url 'project_create' %}">Projekt erstellen</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <!-- Projektkarten oder Tabelle -->
+        <div class="col-md-12">
+            <div class="row">
+                {% for project in projects %}
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ project.name }}</h5>
+                            <p class="card-text">{{ project.description }}</p>
+                            <a href="{% url 'project_edit' project.id %}" class="btn btn-warning">Bearbeiten</a>
+                            <a href="{% url 'project_delete' project.id %}" class="btn btn-danger">Löschen</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
