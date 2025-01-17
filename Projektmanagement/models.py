@@ -4,8 +4,8 @@ from django.db import models
 #----------------------------------------------------------------------------------------------------------
 
 class User(models.Model):
-    firstName = models.CharField(max_length=50, null=True)
-    lastName = models.CharField(max_length=100, null=True)
+    firstName = models.CharField(max_length=255, null=True)
+    lastName = models.CharField(max_length=255, null=True)
     role = models.CharField(max_length=50)
     workhours = models.IntegerField(null=True)
     def __str__(self):
@@ -17,7 +17,6 @@ class Project(models.Model):
     name = models.CharField(max_length=100)
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
-    last_changed = models.DateField(default=start_date, null=True, blank=True)
     notes = models.TextField(null=True, blank=True)
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     def __str__(self):
@@ -30,7 +29,7 @@ class Task(models.Model):
     end_date = models.DateField(null=True, blank=True)
     done = models.BooleanField(default=False)
     description = models.TextField(null=True, blank=True)
-    users = models.ManyToManyField(User, null=True, blank=True)
+    participants = models.ManyToManyField(User, null=True, blank=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
