@@ -20,9 +20,8 @@ from django.urls import path
 from Projektmanagement import views
 
 urlpatterns = [
-    path('/', views.home, name='home'),
-    path('admin/', admin.site.urls),
-    path('project/', views.project, name='project'),
-    path('task/', views.get_task, name='task'),
-    path('task_list/', views.task_list, name='task_list'),
+    path('admin/', admin.site.urls, name='admin'),
+    path('', view.main_view, name='main'),
+    path('project/', view.project_overview, name='overview'),
+    path('project/create', view.project_create, name='create'),
 ]
