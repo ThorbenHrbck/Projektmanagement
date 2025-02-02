@@ -1,5 +1,5 @@
     <!-- templates/Project/ProjectCreate.html -->
-    {% extends "base.html" %}
+    {% extends "baseTemplate.html" %}
 
     {% block content %}
     <div class="container">
@@ -7,7 +7,7 @@
         <form method="post">
             {% csrf_token %}
             <div class="mb-3">
-                <label for="name" class="form-label">Projektname</label>
+                <label for="name" class="form-label">Projektname:</label>
                 <input type="text" class="form-control" id="name" name="name" required>
             </div>
             <div class="mb-3">
