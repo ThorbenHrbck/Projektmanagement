@@ -16,12 +16,12 @@ def project_create(request):
     return render(request, 'Project/ProjectCreate.html')
 
 
-def task_detail(request, num):
+def task_detail(request, task_id):
     try:
-        task = Task.objects.get(pk=num)
+        task = Task.objects.get(pk=task_id)
     except Task.DoesNotExist:
         raise Http404("Task not found")
-    return render(request, 'task.html', {'task': task})
+    return render(request, 'TaskTemplate.html', {'task': task})
 
 
 def task_overview(request, project_id):
