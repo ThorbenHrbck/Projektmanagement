@@ -45,11 +45,6 @@ ToDos:
    - projects include tasks, times, notes
    - no task without project
    - relation between tasks/projects and roles is defined
+  
 
-3. Create Datamodel for Sprints
-   
-   - Sprint has a name
-   - Sprint has a start and end date 
-   - Sprint containes null to many tasks
-   - Sprint is done, when end date in past
 
