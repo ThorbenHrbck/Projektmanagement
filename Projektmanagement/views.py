@@ -21,7 +21,7 @@ def task_detail(request, num):
         task = Task.objects.get(pk=num)
     except Task.DoesNotExist:
         raise Http404("Task not found")
-    return render(request, 'TaskTemplate.html', {'task': task})
+    return render(request, 'task.html', {'task': task})
 
 
 def task_overview(request, project_id):
