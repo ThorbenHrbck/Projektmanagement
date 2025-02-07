@@ -16,9 +16,9 @@ def project_create(request):
     return render(request, 'Project/ProjectCreate.html')
 
 
-def task_detail(request, task_id):
+def task_detail(request, num):
     try:
-        task = Task.objects.get(pk=task_id)
+        task = Task.objects.get(pk=num)
     except Task.DoesNotExist:
         raise Http404("Task not found")
     return render(request, 'task.html', {'task': task})

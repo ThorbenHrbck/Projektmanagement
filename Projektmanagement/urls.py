@@ -16,7 +16,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from . import views
 
 from Projektmanagement import views
 
@@ -25,4 +24,7 @@ urlpatterns = [
     path('', views.main_view, name='main'),
     path('project/', views.project_overview, name='overview'),
     path('project/create', views.project_create, name='create'),
+    path('task/<int:num>', views.task_detail, name='task'),
+    path('tasks', views.task_overview, name='create'),
+
 ]
