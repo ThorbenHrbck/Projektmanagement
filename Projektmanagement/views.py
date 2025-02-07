@@ -11,9 +11,14 @@ def main_view(request):
 def project_overview(request):
     return render(request, 'Project/ProjectOverview.html')
 
+def project_update(request):
+    return render(request, 'Project/ProjectUpdate.html')
 
 def project_create(request):
     return render(request, 'Project/ProjectCreate.html')
+
+def project_delete(request):
+    return render(request, 'Project/ProjectDelete.html')
 
 
 def task_detail(request, task_id):
