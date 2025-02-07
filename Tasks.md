@@ -23,6 +23,14 @@ B: Project can be created, changed and deleted
 
 C: A project has a name and includes tasks, times (Start/End etc.), and notes in a seperate field
 
+D: a Template to visualize task, time, notes, 
+- Projektübersicht
+   - 
+- Taskübersicht
+- Aufgabenübersicht
+- Buttons zum hinzufügen von User zu Projekten
+- 
+
 ---
 
 ToDos:
@@ -32,16 +40,11 @@ ToDos:
    - https://python.plainenglish.io/how-to-implement-role-based-access-control-rbac-in-django-a-step-by-step-guide-31c5e4053868)
 
 
-2. Create Datamodel for tasks and projects (C) Steffi
+2. Create Datamodel for tasks and projects (C)
 
    - projects include tasks, times, notes
    - no task without project
    - relation between tasks/projects and roles is defined
+  
 
-3. Create Datamodel for Sprints
-   
-   - Sprint has a name
-   - Sprint has a start and end date 
-   - Sprint containes null to many tasks
-   - Sprint is done, when end date in past
 

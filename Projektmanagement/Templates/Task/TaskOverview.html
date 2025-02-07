@@ -1,0 +1,36 @@
+<!-- templates/Task/TaskOverview.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Task Übersicht</h1>
+    <div class="row mt-4">
+        <!-- Taskkarten oder Tabelle -->
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Titel</th>
+                        <th>Beschreibung</th>
+                        <th>Projekt</th>
+                        <th>Optionen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks %}
+                    <tr>
+                        <td>{{ task.title }}</td>
+                        <td>{{ task.description }}</td>
+                        <td>{{ task.project.name }}</td>
+                        <td>
+                            <a href="{% url 'task_edit' task.id %}" class="btn btn-warning">Bearbeiten</a>
+                            <a href="{% url 'task_delete' task.id %}" class="btn btn-danger">Löschen</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

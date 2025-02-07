@@ -1,0 +1,28 @@
+<!-- templates/Task/TaskCreate.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Task erstellen</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="title" class="form-label">Titel</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Beschreibung</label>
+            <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="project" class="form-label">Projekt</label>
+            <select class="form-select" id="project" name="project" required>
+                {% for project in projects %}
+                <option value="{{ project.id }}">{{ project.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Erstellen</button>
+    </form>
+</div>
+{% endblock %}

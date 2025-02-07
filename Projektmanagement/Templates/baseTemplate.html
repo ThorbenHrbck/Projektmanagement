@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Projektmanagement</title>
+        <style>
+            .header-container {
+                display: flex;
+                align-items: center; /* Vertikale Zentrierung */
+                justify-content: space-between; /* Abstand zwischen Logo und Titel */
+                padding: 10px;
+            }
+            .top-left-image {
+                width: 70px; /* Breite des Bildes */
+                height: 60px; /* Höhe des Bildes */
+            }
+            .center {
+                flex-grow: 1; /* Lässt das h2 den verbleibenden Platz nutzen */
+                text-align: center;
+                font-size: 24px;
+                margin: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header-container">
+            <a href="{% url 'main' %}">
+                <img id="logo" src="{% static 'logo.png' %}" border="1" class="top-left-image">
+            </a>
+            <h2 class="center">Projektmanagement</h2>
+        </div>
+    
+        <!-- Hier wird der spezifische Inhalt der Seiten eingefügt -->
+        {% block content %}
+        {% endblock %}
+        
+        <!-- Optional: Footer -->
+        <footer>
+            <p>&copy; 2025 Projektmanagement</p>
+        </footer>
+    </body>
+</html>
