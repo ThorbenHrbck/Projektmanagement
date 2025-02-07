@@ -29,9 +29,9 @@ def task_detail(request, task_id):
     return render(request, 'task.html', {'task': task})
 
 
-def task_overview(request):
+def task_overview(request, num):
     try:
-        tasks = Task.objects.all()
+        tasks = Task.objects.filter(project=num)
     except Task.DoesNotExist:
         raise Http404("Tasklist empty")
     return render(request, 'task_list.html', {'tasks': tasks})
