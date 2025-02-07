@@ -3,6 +3,14 @@ from django.shortcuts import render, get_object_or_404
 
 from Projektmanagement.models import Task
 
+def main_view(request):
+    return render(request, 'baseTemplate.html')
+
+def project_overview(request):
+    return render(request, 'Project/ProjectOverview.html')
+
+def project_create(request):
+    return render(request, 'Project/ProjectCreate.html')
 
 def get_task(request, task_id):
     try:
@@ -24,3 +32,4 @@ def home(request):
 
 def project(request):
     return None
+
