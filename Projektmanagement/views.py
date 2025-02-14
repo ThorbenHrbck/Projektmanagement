@@ -21,7 +21,7 @@ def task_detail(request, task_id):
         task = Task.objects.get(pk=task_id)
     except Task.DoesNotExist:
         raise Http404("Task not found")
-    return render(request, 'TaskTemplate.html', {'task': task})
+    return render(request, 'Task/TaskTemplate.html', {'task': task})
 
 
 def task_overview(request, project_id):
@@ -29,4 +29,4 @@ def task_overview(request, project_id):
         tasks = Task.objects.filter(project=project_id)
     except Task.DoesNotExist:
         raise Http404("Tasklist empty")
-    return render(request, 'Tasks.html', {'tasks': tasks})
+    return render(request, 'Task/TaskOverview.html', {'tasks': tasks})
