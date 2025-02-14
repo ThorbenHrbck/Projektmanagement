@@ -1,0 +1,27 @@
+.FormLabelContainer
+{
+    display: block;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 1%;
+    width: 23%;
+}
+
+.FormInputContainer
+{
+    margin-left: 10%;
+    margin-right: 17%;
+    margin-bottom: 1%;
+    width: 40%;
+}
+
+.FormContainer
+{
+    display: flex;
+    margin: auto;
+}
+
+.FormDescriptionContainer
+{
+    height: 100%;
+}
