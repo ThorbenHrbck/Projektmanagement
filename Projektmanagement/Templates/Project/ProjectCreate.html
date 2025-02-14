@@ -2,19 +2,34 @@
     {% extends "baseTemplate.html" %}
 
     {% block content %}
-    <div class="container">
-        <h1>Projekt erstellen</h1>
+    <div>
+        <h1>Create a project</h1>
         <form method="post">
-            {% csrf_token %}
-            <div class="mb-3">
-                <label for="name" class="form-label">Projektname:</label>
-                <input type="text" class="form-control" id="name" name="name" required>
+            <div class="FormContainer">
+                <label class="FormLabelContainer">Project name:</label>
+                <input type="text" id="ProjectName" name="ProjectName" class="FormInputContainer" required>
             </div>
-            <div class="mb-3">
-                <label for="description" class="form-label">Beschreibung</label>
-                <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+            <div class="FormContainer">
+                <label class="FormLabelContainer">Starting date:</label>
+                <input type="date" id="ProjectStartDate" name="ProjectStartDate" class="FormInputContainer" required>
             </div>
-            <button type="submit" class="btn btn-primary">Erstellen</button>
+            <div class="FormContainer">
+                <label class="FormLabelContainer">Ending data:</label>
+                <input type="date" id="ProjectFinishtDate" name="ProjectFinishtDate" class="FormInputContainer" required>
+            </div>
+            <div class="FormContainer">
+                <label class="FormLabelContainer">Projektmanager:</label>
+                <input type="text" id="Projektowner" name="Projektowner" list="Projectmanagers" class="FormInputContainer" required>
+                <datalist id="Projectmanagers">
+                <option value="A">  
+                <option value="B">
+                </datalist>
+            </div>
+            <div class="FormContainer">
+                <label class="FormLabelContainer">Description:</label>
+                <textarea id="ProjectDescription" name="ProjectDescription" rows="15" class="FormInputContainer" required></textarea>
+            </div>
+            <button type="submit">Create</button>
         </form>
     </div>
     {% endblock %}
