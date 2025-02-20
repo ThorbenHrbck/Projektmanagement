@@ -1,7 +1,7 @@
 from django.http import Http404
 from django.shortcuts import render
 
-from Projektmanagement.models import Task
+from Projektmanagement.models import Task, Project, User
 
 
 def main_view(request):
@@ -12,8 +12,16 @@ def project_overview(request):
     return render(request, 'Project/ProjectOverview.html')
 
 
+def project_update(request):
+    return render(request, 'Project/ProjectUpdate.html')
+
+
 def project_create(request):
     return render(request, 'Project/ProjectCreate.html')
+
+
+def project_delete(request):
+    return render(request, 'Project/ProjectDelete.html')
 
 
 def task_detail(request, task_id):
@@ -27,6 +35,8 @@ def task_detail(request, task_id):
 def task_overview(request, project_id):
     try:
         tasks = Task.objects.filter(project=project_id)
+        project = Project.objects.get(pk=project_id)
+        participants = User.objects.filter(project=project_id)
     except Task.DoesNotExist:
         raise Http404("Tasklist empty")
-    return render(request, 'Task/TaskOverview.html', {'tasks': tasks})
+    return render(request, 'Task/TaskOverview.html', {'tasks': tasks, 'project': project})

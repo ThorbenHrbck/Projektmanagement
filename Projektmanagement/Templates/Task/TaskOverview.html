@@ -1,36 +1,49 @@
 <!-- templates/Task/TaskOverview.html -->
-{% extends "base.html" %}
+{% extends "baseTemplate.html" %}
 
 {% block content %}
-<div class="container">
-    <h1>Task Übersicht</h1>
-    <div class="row mt-4">
-        <!-- Taskkarten oder Tabelle -->
-        <div class="col-md-12">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Titel</th>
-                        <th>Beschreibung</th>
-                        <th>Projekt</th>
-                        <th>Optionen</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for task in tasks %}
-                    <tr>
-                        <td>{{ task.title }}</td>
-                        <td>{{ task.description }}</td>
-                        <td>{{ task.project.name }}</td>
-                        <td>
-                            <a href="{% url 'task_edit' task.id %}" class="btn btn-warning">Bearbeiten</a>
-                            <a href="{% url 'task_delete' task.id %}" class="btn btn-danger">Löschen</a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+
+<div style="display: grid">
+    <h1 class="center"><a style="color: black" href="/projects">{{ project.name }}</a></h1>
+    <h2>Task Übersicht</h2>
+
+    <style>
+        .task_container {
+            display: grid;
+            grid-template-columns: 30% 30% 30%;
+            gap: 3%;
+            padding: 1%;
+            border: black solid 2px;
+        }
+    </style>
+
+        <div class="task_container">
+
+        <style>
+            .task {
+                border: lightslategrey solid 2px;
+                padding: 2%;
+            }
+        </style>
+             {% for task in tasks %}
+                 <div class="task">
+                 <h3>{{ task.name }}</h3>
+                     <div>
+                         <div>Starts: {{ task.start_date}}</div>
+                         <ul>
+                             /* TODO!!!! Model hier noch nicht ok */
+                             <li>Erna Bloom</li>
+                             <li>Hans Wurst</li>
+                         </ul>
+                         <div>Ends: {{ task.end_date }}</div>
+                     </div>
+                 <div>Details: <span>{{ task.description }}</span></div>
+                 <div>Done: {{ task.done }}</div>
+                 <button style="background: darkseagreen">Bearbeiten</button>
+                     <button style="background: lightcoral">Löschen</button>
+                 </div>
+             {% endfor %}
         </div>
-    </div>
 </div>
+
 {% endblock %}
