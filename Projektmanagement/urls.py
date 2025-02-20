@@ -16,15 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
 from Projektmanagement import views
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('', views.main_view, name='main'),
-    path('project/', views.project_overview, name='overview'),
-    path('project/create', views.project_create, name='create'),
-    path('task/<int:num>', views.task_detail, name='task'),
-    path('tasks', views.task_overview, name='create'),
-
+    path('projects/', views.project_overview, name='project_overview'),
+    path('projects/create', views.project_create, name='project_create'),
+    path('projects/update', views.project_update, name='project_update'),
+    path('projects/delete', views.project_delete, name='project_delete'),
+    path('task/<int:taskID>', views.task_detail, name='task'),
+    path('tasks/<int:projectID>', views.task_overview, name='createTask')
 ]

@@ -2,19 +2,26 @@
 
 {% block content %}
 <div class="container">
-    <h1>Projektübersicht</h1>
-    <div class="row">
-        <!-- Dropdown-Menü für Filter oder Aktionen -->
-        <div class="col-md-4">
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Optionen
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/create">Projekt erstellen</a></li>
-                </ul>
-            </div>
-        </div>
+    <style>
+        .crud_container {
+            display: flex;
+            justify-content: center; /* Zentriert die Buttons horizontal */
+            gap: 15%; /* Abstand zwischen den Buttons in Prozent */
+        }
+    </style>
+    <div class="crud_container">
+        <a href="{% url 'project_create' %}">
+            <button>Add Project</button>
+        </a>
+        <a href="{% url 'project_delete' %}">
+            <button>Delete Project</button>
+        </a>
+        <a href="{% url 'project_update' %}">
+            <button>Update Project</button>
+        </a>
+        <a href="">
+            <button>Next Projects</button>
+        </a>
     </div>
 
     <div class="row mt-4">
