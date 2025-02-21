@@ -9,7 +9,8 @@ def main_view(request):
 
 
 def project_overview(request):
-    return render(request, 'Project/ProjectOverview.html')
+    projects = Project.objects.all()
+    return render(request, 'Project/ProjectOverview.html', {'projects' : projects})
 
 
 def project_update(request):
