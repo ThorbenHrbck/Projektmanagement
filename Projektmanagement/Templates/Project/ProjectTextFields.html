@@ -1,0 +1,24 @@
+<div class="FormContainer">
+    <label class="FormLabelContainer">Project name:</label>
+    <input type="text" placeholder="Project name" value="{{ project.name }}" name="ProjectName" class="FormInputContainer" required>
+</div>
+<div class="FormContainer">
+    <label class="FormLabelContainer">Starting date:</label>
+    <input type="date" placeholder="Project start date" value="{{ project.start_date }}" name="ProjectStartDate" class="FormInputContainer" required>
+</div>
+<div class="FormContainer">
+    <label class="FormLabelContainer">Ending data:</label>
+    <input type="date" placeholder="Project end date" value="{{ project.end_date }}" name="ProjectEndDate" class="FormInputContainer" required>
+</div>
+<div class="FormContainer">
+    <label class="FormLabelContainer">Projektmanager:</label>
+    <input type="text" placeholder="Project owner" value="{{ project.owner }}" name="ProjectOwner" list="Projectmanagers" class="FormInputContainer" required>
+    <datalist id="Projectmanagers">
+    <option value="A">  
+    <option value="B">
+    </datalist>
+</div>
+<div class="FormContainer">
+    <label class="FormLabelContainer">Description:</label>
+    <textarea placeholder="Project description" value="{{ project.notes }}" name="ProjectDescription" rows="15" class="FormInputContainer" style="resize: none;" required></textarea>
+</div>

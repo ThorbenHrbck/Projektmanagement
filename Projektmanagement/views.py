@@ -20,6 +20,18 @@ def project_update(request):
 def project_create(request):
     return render(request, 'Project/ProjectCreate.html')
 
+def project_create_submission(request):
+    project_name = request.POST.get("ProjectName")
+    project_start_date = request.POST.get("ProjectStartDate")
+    project_end_date = request.POST.get("ProjectEndDate")
+    project_owner_name = request.POST.get("ProjectOwner")
+    project_description = request.POST.get("ProjectDescription")
+    try:
+        user = User.objects.get(firstName=project_owner_name)
+    except User.DoesNotExist:
+        print("Unable")
+        return project_create(request)
+    Project.objects.create(name=project_name, start_date=project_start_date, end_date=project_end_date, notes=project_description, owner=user)
 
 def project_delete(request):
     return render(request, 'Project/ProjectDelete.html')

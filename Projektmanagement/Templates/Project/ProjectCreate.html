@@ -3,33 +3,14 @@
 
     {% block content %}
     <div>
-        <h1>Create a project</h1>
-        <form method="post">
+        <h1 style="margin-left: 41%;">Create a project</h1>
+        <form method="post" action="{% url 'project_create_submission' %}">
+            {% csrf_token %}
+            {%include "Project/ProjectTextFields.html"%}
             <div class="FormContainer">
-                <label class="FormLabelContainer">Project name:</label>
-                <input type="text" id="ProjectName" name="ProjectName" class="FormInputContainer" required>
+                <button type="submit" style="margin-left: 42.8%;">Create</button>
+                <button type="cancel" style="margin-left: 22.4%;">Cancel</button>
             </div>
-            <div class="FormContainer">
-                <label class="FormLabelContainer">Starting date:</label>
-                <input type="date" id="ProjectStartDate" name="ProjectStartDate" class="FormInputContainer" required>
-            </div>
-            <div class="FormContainer">
-                <label class="FormLabelContainer">Ending data:</label>
-                <input type="date" id="ProjectFinishtDate" name="ProjectFinishtDate" class="FormInputContainer" required>
-            </div>
-            <div class="FormContainer">
-                <label class="FormLabelContainer">Projektmanager:</label>
-                <input type="text" id="Projektowner" name="Projektowner" list="Projectmanagers" class="FormInputContainer" required>
-                <datalist id="Projectmanagers">
-                <option value="A">  
-                <option value="B">
-                </datalist>
-            </div>
-            <div class="FormContainer">
-                <label class="FormLabelContainer">Description:</label>
-                <textarea id="ProjectDescription" name="ProjectDescription" rows="15" class="FormInputContainer" required></textarea>
-            </div>
-            <button type="submit">Create</button>
         </form>
     </div>
     {% endblock %}
