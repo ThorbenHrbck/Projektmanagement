@@ -30,7 +30,7 @@ class Task(models.Model):
     end_date = models.DateField(null=True, blank=True)
     done = models.BooleanField(default=False)
     description = models.TextField(null=True, blank=True)
-    participants = models.ManyToManyField(User, null=True, blank=True)
+    participants = models.ManyToManyField(User, blank=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
