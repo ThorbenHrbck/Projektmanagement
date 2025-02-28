@@ -1,9 +1,37 @@
 {% extends "baseTemplate.html" %}
 
 {% block content %}
+<style>
+    .container {
+        width: 15%;
+        border: 2px solid #000;
+        border-radius: 5px;
+    }
+    .separator {
+        width: 100%;
+        height: 2px;
+        background-color: #000;
+    }
+    .row {
+        display: flex;
+        gap: 25%;
+    }
+</style>
 <div>
     {% include 'Project/Button.html' %}
-    {% include 'Project/OneProject.html' %}
+    <div class="row">
+        {% for project in projects %}
+            <div class="container">
+                <div class="entry">
+                    <h3>{{ project.name }}</h3>
+                    <div class="separator"></div>  
+                    <p>{{ project.notes }}</p>
+                </div>
+            </div>
+        {% empty %}
+            <p>Keine Einträge vorhanden.</p>
+        {% endfor %}
+    </div>
     {% include 'Project/Button.html' %}
 </div>
 {% endblock %}
