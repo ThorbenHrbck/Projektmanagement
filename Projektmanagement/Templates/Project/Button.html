@@ -15,7 +15,9 @@
     <a href="{% url 'project_update' %}">
         <button>Update Project</button>
     </a>
-    <a href="">
-        <button>Next Projects</button>
-    </a>
+    {% if projects.has_next %}
+        <a href="?page={{ projects.next_page_number }}">
+            <button>Next Projects</button>
+        </a>
+    {% endif %}
 </div>
