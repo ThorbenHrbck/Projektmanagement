@@ -23,6 +23,11 @@
         gap: 15%; /* Abstand zwischen den Buttons in Prozent */
         margin-top: 20px;
     }
+    .text {
+        font-size: 15px;    /* Schriftgröße anpassen */
+        margin: 5px 0;      /* Abstand oben und unten anpassen */
+        line-height: 1.5;   /* Zeilenhöhe für bessere Lesbarkeit */
+    }
 </style>
 <div>
     {% include 'Project/Button.html' %}
@@ -36,7 +41,10 @@
             <div class="entry">
                 <h3>{{ project.name }}</h3>
                 <div class="separator"></div>  
-                <p>{{ project.notes }}</p>
+                <p class="text">Start Date: {{project.start_date}}</p>
+                <p class="text">End Date: {{project.end_date}}</p>
+                <p class="text">Description: {{project.notes}}</p>
+                <p class="text">Owner: {{project.owner}}</p>
             </div>
         </div>
         
