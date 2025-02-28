@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.http import Http404
 from django.shortcuts import render
 
@@ -9,7 +10,10 @@ def main_view(request):
 
 
 def project_overview(request):
-    projects = Project.objects.all()
+    all_projects = Project.objects.all()
+    paginator = Paginator(all_projects, 9)
+    page_number = request.GET.get('page')
+    projects = paginator.get_page(page_number)
     return render(request, 'Project/ProjectOverview.html', {'projects' : projects})
 
 
