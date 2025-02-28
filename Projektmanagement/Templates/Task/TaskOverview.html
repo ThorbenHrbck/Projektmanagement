@@ -3,47 +3,85 @@
 
 {% block content %}
 
-<div style="display: grid">
-    <h1 class="center"><a style="color: black" href="/projects">{{ project.name }}</a></h1>
-    <h2>Task Übersicht</h2>
+    <div style="display: grid">
+        <h1 class="center"><a style="color: black" href="/projects">{{ project.name }}</a></h1>
+        <h2>Task Übersicht</h2>
 
-    <style>
-        .task_container {
-            display: grid;
-            grid-template-columns: 30% 30% 30%;
-            gap: 3%;
-            padding: 1%;
-            border: black solid 2px;
-        }
-    </style>
+        <style>
+            .task_container {
+                display: grid;
+                grid-template-columns: 30% 30% 30%;
+                gap: 3%;
+                padding: 1%;
+                border: black solid 2px;
+            }
+        </style>
 
         <div class="task_container">
 
-        <style>
-            .task {
-                border: lightslategrey solid 2px;
-                padding: 2%;
-            }
-        </style>
-             {% for task in tasks %}
-                 <div class="task">
-                 <h3>{{ task.name }}</h3>
-                     <div>
-                         <div>Starts: {{ task.start_date}}</div>
-                         <ul>
-                             /* TODO!!!! Model hier noch nicht ok */
-                             <li>Erna Bloom</li>
-                             <li>Hans Wurst</li>
-                         </ul>
-                         <div>Ends: {{ task.end_date }}</div>
-                     </div>
-                 <div>Details: <span>{{ task.description }}</span></div>
-                 <div>Done: {{ task.done }}</div>
-                 <button style="background: darkseagreen">Bearbeiten</button>
-                     <button style="background: lightcoral">Löschen</button>
-                 </div>
-             {% endfor %}
+            <style>
+                .task {
+                    border: lightslategrey solid 2px;
+                    padding: 2%;
+                }
+            </style>
+            {% for task in tasks %}
+                <div class="task">
+                    <h3>{{ task.name }}</h3>
+                    <div style=>
+                        <div>Starts: {{ task.start_date|date:"d.m.Y" }}</div>
+                        <select name="participants" id="participants">
+                            <option value="default">Participants</option>
+                            {% for participant in participants %}
+                                <option value="{% url 'user' participant.id %}">{{ participant }}</option>
+                            {% endfor %}
+                        </select>
+                        <div>Ends: {{ task.end_date|date:"d.m.Y" }}</div>
+                    </div>
+                    <div>Details: <span>{{ task.description }}</span></div>
+                    <span class="task-status"
+                          data-task-id="{{ task.id }}"
+                            {% if task.done %}
+                          class="text-success" style="cursor: pointer;">Done: ✅
+                            {% else %}
+                                class="text-danger" style="cursor: pointer;">Done: ❌
+                            {% endif %}
+                    </span>
+
+                    <div>
+                        <button style="background: darkseagreen">Bearbeiten</button>
+                        <button style="background: lightcoral">Löschen</button>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-</div>
+    </div>
+    <div id="task-{{ task.id }}">
+    <span class="task-status"
+          data-task-id="{{ task.id }}"></span>
+    </div>
+
+    <script>
+        document.querySelectorAll('.task-status').forEach(function (statusElement) {
+            statusElement.addEventListener('click', function () {
+                let taskId = statusElement.getAttribute('data-task-id');
+
+                fetch(`/toggle_completed/${taskId}/`, {
+                    method: 'GET',
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.done) {
+                            statusElement.innerHTML = 'Done: ✅';
+                        } else {
+                            statusElement.innerHTML = 'Done: ❌';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+        });
+    </script>
 
 {% endblock %}

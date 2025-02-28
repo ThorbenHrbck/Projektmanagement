@@ -1,4 +1,4 @@
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from django.shortcuts import render
 
 from Projektmanagement.models import Task, Project, User
@@ -35,8 +35,23 @@ def task_detail(request, task_id):
 def task_overview(request, project_id):
     try:
         tasks = Task.objects.filter(project=project_id)
-        project = Project.objects.get(pk=project_id)
+        project = Project.objects.get(id=project_id)
         participants = User.objects.filter(project=project_id)
     except Task.DoesNotExist:
         raise Http404("Tasklist empty")
-    return render(request, 'Task/TaskOverview.html', {'tasks': tasks, 'project': project})
+    return render(request, 'Task/TaskOverview.html', {'tasks': tasks, 'project': project, 'participants': participants})
+
+
+def toggle_completed(request, task_id):
+    task = Task.objects.get(id=task_id)
+    task.done = not task.done
+    task.save()
+    return JsonResponse({'done': task.done})
+
+
+def user_view(request, user_id):
+    try:
+        user = User.objects.get(pk=user_id)
+    except User.DoesNotExist:
+        raise Http404("Couldnt find user")
+    return user

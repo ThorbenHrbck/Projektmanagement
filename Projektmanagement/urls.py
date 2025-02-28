@@ -27,4 +27,6 @@ urlpatterns = [
     path('projects/delete', views.project_delete, name='project_delete'),
     path('task/<int:task_id>', views.task_detail, name='task'),
     path('tasks/<int:project_id>', views.task_overview, name='tasks_overview'),
+    path('user/<int:id>/', views.user_view, name='user'),
+    path('toggle_completed/<int:task_id>/', views.toggle_completed, name='toggle_completed'),
 ]
