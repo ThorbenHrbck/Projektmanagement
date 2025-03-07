@@ -15,23 +15,45 @@
     .row {
         display: flex;
         gap: 25%;
+        margin-bottom: 3%;
+    }
+    .crud_container {
+        display: flex;
+        justify-content: center; /* Zentriert die Buttons horizontal */
+        gap: 15%; /* Abstand zwischen den Buttons in Prozent */
+        margin-top: 20px;
+    }
+    .text {
+        font-size: 15px;    /* Schriftgröße anpassen */
+        margin: 5px 0;      /* Abstand oben und unten anpassen */
+        line-height: 1.5;   /* Zeilenhöhe für bessere Lesbarkeit */
     }
 </style>
 <div>
     {% include 'Project/Button.html' %}
-    <div class="row">
-        {% for project in projects %}
-            <div class="container">
-                <div class="entry">
-                    <h3>{{ project.name }}</h3>
-                    <div class="separator"></div>  
-                    <p>{{ project.notes }}</p>
-                </div>
+    
+    {% for project in projects %}
+        {% if forloop.counter0|divisibleby:"3" %}
+            <div class="row">
+        {% endif %}
+        
+        <div class="container">
+            <div class="entry">
+                <h3>{{ project.name }}</h3>
+                <div class="separator"></div>  
+                <p class="text">Start Date: {{project.start_date}}</p>
+                <p class="text">End Date: {{project.end_date}}</p>
+                <p class="text">Owner: {{project.owner}}</p>
+                <p class="text">Description: {{project.notes}}</p>
             </div>
-        {% empty %}
-            <p>Keine Einträge vorhanden.</p>
-        {% endfor %}
-    </div>
+        </div>
+        
+        {% if forloop.counter|divisibleby:"3" or forloop.last %}
+            </div>
+        {% endif %}
+    {% empty %}
+        <p>Keine Einträge vorhanden.</p>
+    {% endfor %}
     {% include 'Project/Button.html' %}
 </div>
 {% endblock %}
