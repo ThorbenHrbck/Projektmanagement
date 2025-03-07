@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import fields, DateTimeInput, DateInput
+from django.forms import fields
 
 from .models import Task, User, Project
 
@@ -32,3 +32,15 @@ class TaskForm(forms.ModelForm):
         widget=DateInput,
         required=False,
     )
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        start_date = cleaned_data.get("start_date")
+        end_date = cleaned_data.get("end_date")
+
+        if start_date and end_date:
+            if start_date > end_date:
+                super().add_error('start_date', 'Start date cannot be after End date')
+
+        return cleaned_data

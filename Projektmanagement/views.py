@@ -61,7 +61,7 @@ def task_create(request, project_id=None):
             if project:
                 task.project = project
             task.save()
-            return redirect("project_overview")
+            return redirect('tasks_overview', project_id=task.project.id)
     else:
         form = TaskForm(initial={'project': project} if project else {})
 
