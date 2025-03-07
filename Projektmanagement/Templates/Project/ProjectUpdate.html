@@ -4,10 +4,11 @@
     {% block content %}
     <div>
         <h1 style="margin-left: 41%;">Update a project</h1>
-        <form method="post">
+        <form method="post" action="{% url 'project_update/<id>/' project.id %}">
+            {% csrf_token %}
             {%include "Project/ProjectTextFields.html"%}
             <div class="FormContainer">
-                <button type="submit" style="margin-left: 42.8%;" action="{% url 'project_update' %}">Update</button>
+                <button type="submit" style="margin-left: 42.8%;">Update</button>
                 <button type="cancel" style="margin-left: 22.4%;" action="{% url 'project_overview' %}">Cancel</button>
             </div>
         </form>

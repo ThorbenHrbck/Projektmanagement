@@ -34,7 +34,9 @@
                 <option value="default">Select Site to change to</option>
                 <option value="{% url 'project_overview' %}">Project Overview</option>
                 <option value="{% url 'project_create' %}">Project Create</option>
-                <option value="{% url 'project_update' %}">Project Update</option>
+                {% if project.id %}
+                    <option value="{% url 'project_update' project.id %}">Project Update</option>
+                {% endif %}
                 <option value="{% url 'project_delete' %}">Project Delete</option>
               </select>
               <script>

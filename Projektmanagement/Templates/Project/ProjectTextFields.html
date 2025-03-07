@@ -4,11 +4,11 @@
 </div>
 <div class="FormContainer">
     <label class="FormLabelContainer">Starting date:</label>
-    <input type="date" placeholder="Project start date" value="{{ project.start_date }}" name="ProjectStartDate" class="FormInputContainer" required>
+    <input type="date" placeholder="Project start date" value="{{ project.start_date|date:'Y-m-d' }}" name="ProjectStartDate" class="FormInputContainer" required>
 </div>
 <div class="FormContainer">
     <label class="FormLabelContainer">Ending data:</label>
-    <input type="date" placeholder="Project end date" value="{{ project.end_date }}" name="ProjectEndDate" class="FormInputContainer" required>
+    <input type="date" placeholder="Project end date" value="{{ project.end_date|date:'Y-m-d' }}" name="ProjectEndDate" class="FormInputContainer" required>
 </div>
 <div class="FormContainer">
     <label class="FormLabelContainer">Projektmanager:</label>
@@ -20,5 +20,5 @@
 </div>
 <div class="FormContainer">
     <label class="FormLabelContainer">Description:</label>
-    <textarea placeholder="Project description" value="{{ project.notes }}" name="ProjectDescription" rows="15" class="FormInputContainer" style="resize: none;" required></textarea>
+    <textarea placeholder="Project description" name="ProjectDescription" rows="15" class="FormInputContainer" style="resize: none;" required>{{ project.notes }}</textarea>
 </div>

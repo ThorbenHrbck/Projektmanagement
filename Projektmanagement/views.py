@@ -1,5 +1,5 @@
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from Projektmanagement.models import Task, Project, User
 
@@ -13,8 +13,22 @@ def project_overview(request):
     return render(request, 'Project/ProjectOverview.html', {'projects' : projects})
 
 
-def project_update(request):
-    return render(request, 'Project/ProjectUpdate.html')
+def project_update(request, id):
+    project = get_object_or_404(Project, id=id)
+
+    if request.method == "POST":
+        project.name = request.POST.get("ProjectName")
+        project.start_date = request.POST.get("ProjectStartDate")
+        project.end_date = request.POST.get("ProjectEndDate")
+        project.notes = request.POST.get("ProjectDescription")
+        try:
+            user = User.objects.get(firstName=request.POST.get("ProjectOwner").split(" ")[0])
+            project.owner = user
+            project.save()
+            return project_overview(request)
+        except User.DoesNotExist:
+            print("Unable")
+    return render(request, "Project/ProjectUpdate.html", {"project": project})
 
 
 def project_create(request):
