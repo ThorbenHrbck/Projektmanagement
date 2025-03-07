@@ -12,9 +12,9 @@
     <a href="{% url 'project_delete' %}">
         <button>Delete Project</button>
     </a>
-    <a href="{% url 'project_update' %}">
+    <!-- <a href="{% url 'project_update' %}">
         <button>Update Project</button>
-    </a>
+    </a> -->
     {% if projects.has_next %}
         <a href="?page={{ projects.next_page_number }}">
             <button>Next Projects</button>
