@@ -1,24 +1,34 @@
 <!-- templates/Task/TaskOverview.html -->
-{% extends "Task/Buttons.html" %}
+{% extends "baseTemplate.html" %}
 
 {% block content %}
 
+    <style>
+        .task_container {
+            display: grid;
+            grid-template-columns: 30% 30% 30%;
+            gap: 3%;
+            padding: 1%;
+            border: black solid 2px;
+        }
+    </style>
+
+    <div>
     <div style="display: grid">
-        <h1 class="center"><a style="color: black" href="/projects">{{ project.name }}</a></h1>
-        <h2>Task Übersicht</h2>
+        <h2>Task Overview: <a style="color: black" href="/projects">{{ project.name }}</a></h2>
+        <a href="create/{{ project.id }}">
+            <button>Add Task</button>
+        </a>
+        {% if tasks.has_next %}
+            <a style="justify-self: flex-end" href="?page={{ task.next_page_number }}">
+                <button>Next Tasks >></button>
+            </a>
+        {% endif %}
+    </div>
+    <br>
 
-        <style>
-            .task_container {
-                display: grid;
-                grid-template-columns: 30% 30% 30%;
-                gap: 3%;
-                padding: 1%;
-                border: black solid 2px;
-            }
-        </style>
-
+    <div>
         <div class="task_container">
-
             <style>
                 .task {
                     border: lightslategrey solid 2px;
