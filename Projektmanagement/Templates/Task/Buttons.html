@@ -1,0 +1,25 @@
+{% extends "baseTemplate.html" %}
+
+<style>
+    .crud_container {
+        display: flex;
+        justify-content: center;
+        gap: 15%;
+    }
+</style>
+<div class="crud_container">
+    <a href="{% url 'project_create' %}">
+        <button>Add Task</button>
+    </a>
+    <a href="{% url 'project_delete' %}">
+        <button>Delete Task</button>
+    </a>
+    <a href="{% url 'project_update' %}">
+        <button>Update Task</button>
+    </a>
+    {% if tasks.has_next %}
+        <a href="?page={{ tasks.next_page_number }}">
+            <button>Next Tasks</button>
+        </a>
+    {% endif %}
+</div>

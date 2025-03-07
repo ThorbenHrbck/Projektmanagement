@@ -1,7 +1,8 @@
 from django.core.paginator import Paginator
-from django.http import Http404
-from django.shortcuts import render, get_object_or_404
+from django.http import Http404, JsonResponse
+from django.shortcuts import render, redirect, get_object_or_404
 
+from Projektmanagement.forms import TaskForm
 from Projektmanagement.models import Task, Project, User
 
 
@@ -65,9 +66,40 @@ def task_detail(request, task_id):
 
 def task_overview(request, project_id):
     try:
-        tasks = Task.objects.filter(project=project_id)
-        project = Project.objects.get(pk=project_id)
+        project = Project.objects.get(id=project_id)
         participants = User.objects.filter(project=project_id)
+
+        all_tasks = Task.objects.filter(project=project_id).order_by('created_date')
+        paginator = Paginator(all_tasks, 6)
+        page_number = request.GET.get('page')
+        tasks = paginator.get_page(page_number)
     except Task.DoesNotExist:
         raise Http404("Tasklist empty")
-    return render(request, 'Task/TaskOverview.html', {'tasks': tasks, 'project': project})
+    return render(request, 'Task/TaskOverview.html', {'tasks': tasks, 'project': project, 'participants': participants})
+
+
+def task_create(request):
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('tasks_overview')
+    else:
+        form = TaskForm()
+
+    return render(request, 'Task/task_create.html', {'form': form})
+
+
+def toggle_completed(request, task_id):
+    task = Task.objects.get(id=task_id)
+    task.done = not task.done
+    task.save()
+    return JsonResponse({'done': task.done})
+
+
+def user_view(request, user_id):
+    try:
+        user = User.objects.get(pk=user_id)
+    except User.DoesNotExist:
+        raise Http404("Couldnt find user")
+    return user

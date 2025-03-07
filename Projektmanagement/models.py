@@ -1,7 +1,8 @@
 from django.db import models
 from datetime import date, timedelta
 
-#----------------------------------------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------------------------------------
 
 
 class User(models.Model):
@@ -9,10 +10,12 @@ class User(models.Model):
     lastName = models.CharField(max_length=255, null=True)
     role = models.CharField(max_length=50)
     workhours = models.IntegerField(null=True)
+
     def __str__(self):
         return self.firstName + ' ' + self.lastName
 
-#----------------------------------------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------------------------------------
 
 class Project(models.Model):
     name = models.CharField(max_length=100)
@@ -20,22 +23,26 @@ class Project(models.Model):
     end_date = models.DateField(null=True, blank=True)
     notes = models.TextField(null=True, blank=True)
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+
     def __str__(self):
         return self.name
 
 
 class Task(models.Model):
     name = models.CharField(max_length=100)
-    start_date = models.DateField(null=True, blank=True)
-    end_date = models.DateField(null=True, blank=True)
+    start_date = models.DateField(null=True)
+    end_date = models.DateField(null=True)
     done = models.BooleanField(default=False)
     description = models.TextField(null=True, blank=True)
     participants = models.ManyToManyField(User, blank=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    created_date = models.DateField(auto_now_add=True)
+
     def __str__(self):
         return self.name
 
-#----------------------------------------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------------------------------------
 class Sprint(models.Model):
     name = models.CharField(max_length=100)
     start_date = models.DateField(null=False, blank=True)
@@ -46,7 +53,7 @@ class Sprint(models.Model):
     def save(self, *args, **kwargs):
         # 'done' is true when end_date in the past
         if self.end_date and self.end_date < date.today():
-         self.done = True
+            self.done = True
         else:
             self.done = False
 
@@ -54,7 +61,7 @@ class Sprint(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-     return self.name
+        return self.name
 
     def workhours(self):
         # No workdays between start_date und end_date.
@@ -67,4 +74,4 @@ class Sprint(models.Model):
             if current_date.weekday() < 5:  # Monday=0, Sunday=6
                 workdays += 1
             current_date += timedelta(days=1)
-        return workdays * 8 # 8-Hour Days
+        return workdays * 8  # 8-Hour Days
