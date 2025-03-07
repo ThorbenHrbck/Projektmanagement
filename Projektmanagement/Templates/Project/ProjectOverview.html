@@ -3,10 +3,11 @@
 {% block content %}
 <style>
     .container {
-        width: 15%;
+        width: 130%; /* Beispiel: feste Breite */
         border: 2px solid #000;
         border-radius: 5px;
     }
+
     .separator {
         width: 100%;
         height: 2px;
@@ -15,7 +16,8 @@
     .row {
         display: flex;
         gap: 25%;
-        margin-bottom: 3%;
+        margin-bottom: 2%;
+        margin-top: 1%;
     }
     .crud_container {
         display: flex;
@@ -36,18 +38,18 @@
         {% if forloop.counter0|divisibleby:"3" %}
             <div class="row">
         {% endif %}
-        
-        <div class="container">
-            <div class="entry">
-                <h3>{{ project.name }}</h3>
-                <div class="separator"></div>  
-                <p class="text">Start Date: {{project.start_date}}</p>
-                <p class="text">End Date: {{project.end_date}}</p>
-                <p class="text">Owner: {{project.owner}}</p>
-                <p class="text">Description: {{project.notes}}</p>
+        <a href="{% url 'tasks_overview' project.id %}">
+            <div class="container">
+                <div class="entry">
+                    <h3>{{ project.name }}</h3>
+                    <div class="separator"></div>  
+                    <p class="text">Start Date: {{project.start_date}}</p>
+                    <p class="text">End Date: {{project.end_date}}</p>
+                    <p class="text">Owner: {{project.owner}}</p>
+                    <p class="text">Description: {{project.notes}}</p>
+                </div>
             </div>
-        </div>
-        
+        </a>
         {% if forloop.counter|divisibleby:"3" or forloop.last %}
             </div>
         {% endif %}
