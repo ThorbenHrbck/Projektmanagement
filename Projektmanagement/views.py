@@ -45,7 +45,8 @@ def task_overview(request, project_id):
         tasks = paginator.get_page(page_number)
     except Task.DoesNotExist:
         raise Http404("Tasklist empty")
-    return render(request, 'Task/TaskOverview.html', {'tasks': tasks, 'project': project, 'participants': participants})
+    return render(request, 'Task/task_overview.html',
+                  {'tasks': tasks, 'project': project, 'participants': participants})
 
 
 def task_create(request, project_id=None):
@@ -68,8 +69,18 @@ def task_create(request, project_id=None):
     return render(request, "Task/task_create.html", {"form": form, "project": project})
 
 
-def task_delete(request, task_id=None):
-    return render(request, 'Task/TaskDelete.html', {'task_id': task_id})
+def task_delete_page(request, task_id):
+    task = Task.objects.get(pk=task_id)
+    project = task.project
+    return render(request, 'Task/task_delete.html', {'task': task, 'project': project})
+
+
+def task_delete(request, task_id):
+    task = Task.objects.get(pk=task_id)
+    project = task.project
+    task.delete()
+    task.save()
+    return redirect('tasks_overview', project_id=project.id)
 
 
 def toggle_completed(request, task_id):

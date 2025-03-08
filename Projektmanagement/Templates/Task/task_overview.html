@@ -11,6 +11,14 @@
             padding: 1%;
             border: black solid 2px;
         }
+
+        .update_btn {
+            background: darkseagreen;
+        }
+
+        .delete_btn {
+            background: lightcoral;
+        }
     </style>
 
     <div>
@@ -59,40 +67,38 @@
                     </span>
 
                         <div>
-                            <button style="background: darkseagreen">Bearbeiten</button>
-                            <button style="background: lightcoral">Löschen</button>
+                            <a class=update_btn>Update
+                            </a>
+                            <a class=delete_btn href="{% url 'task_delete_page' task.id %}">Delete</a>
                         </div>
                     </div>
                 {% endfor %}
             </div>
         </div>
-        <div id="task-{{ task.id }}">
-    <span class="task-status"
-          data-task-id="{{ task.id }}"></span>
-        </div>
-
-        <script>
-            document.querySelectorAll('.task-status').forEach(function (statusElement) {
-                statusElement.addEventListener('click', function () {
-                    let taskId = statusElement.getAttribute('data-task-id');
-
-                    fetch(`/toggle_completed/${taskId}/`, {
-                        method: 'GET',
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.done) {
-                                statusElement.innerHTML = 'Done: ✅';
-                            } else {
-                                statusElement.innerHTML = 'Done: ❌';
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                        });
-                });
-            });
-        </script>
     </div>
+
+    <script>
+        document.querySelectorAll('.task-status').forEach(function (statusElement) {
+            statusElement.addEventListener('click', function () {
+                let taskId = statusElement.getAttribute('data-task-id');
+
+                fetch(`/toggle_completed/${taskId}/`, {
+                    method: 'GET',
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.done) {
+                            statusElement.innerHTML = 'Done: ✅';
+                        } else {
+                            statusElement.innerHTML = 'Done: ❌';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+        });
+    </script>
+
 
 {% endblock %}
