@@ -34,10 +34,12 @@
                 <option value="default">Select Site to change to</option>
                 <option value="{% url 'project_overview' %}">Project Overview</option>
                 <option value="{% url 'project_create' %}">Project Create</option>
-                {% if project.id %}
+                {% if project and project.id %}
                     <option value="{% url 'project_update' project.id %}">Project Update</option>
                 {% endif %}
-                <option value="{% url 'project_delete' %}">Project Delete</option>
+                {% if project and project.id %}
+                    <option value="{% url 'project_delete_new' project.id %}">Project Delete</option>
+                {% endif %}
               </select>
               <script>
                 document.getElementById("selecter").addEventListener("change", function() {

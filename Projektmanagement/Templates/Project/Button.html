@@ -1,23 +1,17 @@
 <style>
-    .crud_container {
-        display: flex;
-        justify-content: center; /* Zentriert die Buttons horizontal */
-        gap: 15%; /* Abstand zwischen den Buttons in Prozent */
-    }
+    .global-crud {
+    display: flex;
+    justify-content: center;
+    /* gap: 15%; */
+}
 </style>
-<div class="crud_container">
-    <a href="{% url 'project_create' %}">
-        <button>Add Project</button>
-    </a>
-    <a href="{% url 'project_delete' %}">
-        <button>Delete Project</button>
-    </a>
-    <!-- <a href="{% url 'project_update' %}">
-        <button>Update Project</button>
-    </a> -->
-    {% if projects.has_next %}
-        <a href="?page={{ projects.next_page_number }}">
-            <button>Next Projects</button>
+    <div class="global-crud">
+        <a href="{% url 'project_create' %}">
+            <button type="button">Add Project</button>
         </a>
-    {% endif %}
-</div>
+        {% if projects.has_next %}
+            <a href="?page={{ projects.next_page_number }}">
+                <button type="button">Next Projects</button>
+            </a>
+        {% endif %}
+    </div>

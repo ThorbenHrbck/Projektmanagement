@@ -2,54 +2,49 @@
 
 {% block content %}
 <style>
+    /* Container für ein einzelnes Projekt */
     .container {
-        width: 130%; /* Beispiel: feste Breite */
+        /* width: 130%; */
         border: 2px solid #000;
         border-radius: 5px;
-    }
-
-    .separator {
-        width: 100%;
-        height: 2px;
-        background-color: #000;
+        margin-bottom: 2%;
+        padding: 10px;
+        position: relative;
     }
     .row {
         display: flex;
         gap: 25%;
-        margin-bottom: 2%;
-        margin-top: 1%;
-    }
-    .crud_container {
-        display: flex;
-        justify-content: center; /* Zentriert die Buttons horizontal */
-        gap: 15%; /* Abstand zwischen den Buttons in Prozent */
-        margin-top: 20px;
+        margin-top: 0.5%;
     }
     .text {
-        font-size: 15px;    /* Schriftgröße anpassen */
-        margin: 5px 0;      /* Abstand oben und unten anpassen */
-        line-height: 1.5;   /* Zeilenhöhe für bessere Lesbarkeit */
+        font-size: 15px;
+        margin: 5px;
+        line-height: 1.5;
     }
+
 </style>
 <div>
     {% include 'Project/Button.html' %}
-    
+    <!-- Projektliste -->
     {% for project in projects %}
         {% if forloop.counter0|divisibleby:"3" %}
             <div class="row">
         {% endif %}
-        <a href="{% url 'tasks_overview' project.id %}">
-            <div class="container">
-                <div class="entry">
-                    <h3>{{ project.name }}</h3>
-                    <div class="separator"></div>  
-                    <p class="text">Start Date: {{project.start_date}}</p>
-                    <p class="text">End Date: {{project.end_date}}</p>
-                    <p class="text">Owner: {{project.owner}}</p>
-                    <p class="text">Description: {{project.notes}}</p>
-                </div>
+        <div class="container">
+            <div class="entry">
+                <h3 class="text">{{ project.name }}</h3>
+                <p class="text">Start Date: {{ project.start_date }}</p>
+                <p class="text">End Date: {{ project.end_date }}</p>
+                <p class="text">Owner: {{ project.owner }}</p>
+                <p class="text">Description: {{ project.notes }}</p>
+                <a href="{% url 'project_update' project.id %}">
+                    <button type="button">Update</button>
+                </a>
+                <a href="{% url 'project_delete_new' project.id %}">
+                    <button type="button">Delete</button>
+                </a>
             </div>
-        </a>
+        </div>
         {% if forloop.counter|divisibleby:"3" or forloop.last %}
             </div>
         {% endif %}

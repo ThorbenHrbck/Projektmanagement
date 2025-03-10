@@ -30,7 +30,7 @@ def project_update(request, id):
             user = User.objects.get(firstName=request.POST.get("ProjectOwner").split(" ")[0])
             project.owner = user
             project.save()
-            return project_overview(request)
+            return redirect('project_overview')
         except User.DoesNotExist:
             print("Unable")
     return render(request, "Project/ProjectUpdate.html", {"project": project})
@@ -54,6 +54,13 @@ def project_create_submission(request):
 
 def project_delete(request):
     return render(request, 'Project/ProjectDelete.html')
+
+def project_delete_new(request, id):
+    project = get_object_or_404(Project, id=id)
+    if request.method == "POST":
+        project.delete()
+        return redirect('project_overview')
+    return render(request, 'Project/ProjectDelete.html', {'project': project})
 
 
 def task_detail(request, task_id):
