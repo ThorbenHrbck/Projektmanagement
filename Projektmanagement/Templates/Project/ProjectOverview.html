@@ -4,7 +4,6 @@
 <style>
     /* Container für ein einzelnes Projekt */
     .container {
-        /* width: 130%; */
         border: 2px solid #000;
         border-radius: 5px;
         margin-bottom: 2%;
@@ -21,7 +20,19 @@
         margin: 5px;
         line-height: 1.5;
     }
-
+    /* Der klickbare Bereich für Projektdetails */
+    .project-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        /* Optional: beim Hover visuell hervorheben */
+    }
+    /* Bereich für die Aktions-Buttons (Update, Delete) */
+    .action-buttons {
+        margin-top: 10px;
+        display: flex;
+        gap: 10px;
+    }
 </style>
 <div>
     {% include 'Project/Button.html' %}
@@ -31,12 +42,18 @@
             <div class="row">
         {% endif %}
         <div class="container">
-            <div class="entry">
-                <h3 class="text">{{ project.name }}</h3>
-                <p class="text">Start Date: {{ project.start_date }}</p>
-                <p class="text">End Date: {{ project.end_date }}</p>
-                <p class="text">Owner: {{ project.owner }}</p>
-                <p class="text">Description: {{ project.notes }}</p>
+            <!-- Klickbarer Bereich: Führt zur Task Overview (tasks_overview erwartet project_id) -->
+            <a class="project-link" href="{% url 'tasks_overview' project.id %}">
+                <div class="entry">
+                    <h3 class="text">{{ project.name }}</h3>
+                    <p class="text">Start Date: {{ project.start_date }}</p>
+                    <p class="text">End Date: {{ project.end_date }}</p>
+                    <p class="text">Owner: {{ project.owner }}</p>
+                    <p class="text">Description: {{ project.notes }}</p>
+                </div>
+            </a>
+            <!-- Aktions-Buttons: Update und Delete -->
+            <div class="action-buttons">
                 <a href="{% url 'project_update' project.id %}">
                     <button type="button">Update</button>
                 </a>
