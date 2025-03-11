@@ -1,0 +1,14 @@
+<!-- templates/Task/TaskDelete.html -->
+{% extends "baseTemplate.html" %}
+
+{% block content %}
+    <div class="container">
+        <h1>Delete Task</h1>
+        <p>Do you really want to delete the Task <span style="font-style: italic"> {{ task.name }} </span>?</p>
+        <form action="../delete/{{ task.id }}" method="post">
+            {% csrf_token %}
+            <button type="submit">Delete</button>
+            <a href="/tasks/{{ project.id }}">Abort</a>
+        </form>
+    </div>
+{% endblock %}

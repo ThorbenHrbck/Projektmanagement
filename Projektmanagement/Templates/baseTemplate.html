@@ -1,34 +1,43 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Projektmanagement</title>
-        <link rel="stylesheet" href="{% static 'styles.css' %}">
-        <style>
-            .header-container {
-                display: flex;
-                align-items: center; /* Vertikale Zentrierung */
-                justify-content: space-between; /* Abstand zwischen Logo und Titel */
-                padding: 10px;
-                background-color: lightcoral; /* TODO: entfernen - nur für meine Übersicht. Steffi */
-            }
-            .top-left-image {
-                width: 80px; /* Breite des Bildes */
-                height: 60px; /* Höhe des Bildes */
-            }
-            .center {
-                flex-grow: 1; /* Lässt das h2 den verbleibenden Platz nutzen */
-                text-align: center;
-                font-size: 24px;
-                margin: 0;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="header-container">
-            <a href="{% url 'main' %}">
-                <img id="logo" src="{% static 'logo.png' %}" border="1" class="top-left-image">
-            </a>
+<head>
+    <title>Projektmanagement</title>
+    <style>
+        .header-container {
+            display: flex;
+            align-items: center; /* Vertikale Zentrierung */
+            justify-content: space-between; /* Abstand zwischen Logo und Titel */
+            padding: 10px;
+            background-color: lightcoral; /* TODO: entfernen - nur für meine Übersicht. Steffi */
+        }
+
+        .top-left-image {
+            width: 80px; /* Breite des Bildes */
+            height: 60px; /* Höhe des Bildes */
+        }
+
+        .center {
+            flex-grow: 1; /* Lässt das h2 den verbleibenden Platz nutzen */
+            text-align: center;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .errorlist {
+            color: red;
+            border: solid 2px red;
+            list-style: none;
+            width: 40%;
+            padding: 6px;
+        }
+    </style>
+</head>
+<body>
+<div class="header-container">
+    <a href="{% url 'main' %}">
+        <img id="logo" src="{% static 'logo.png' %}" border="1" class="top-left-image">
+    </a>
 
             <select name="view_selecter" id="selecter">
                 <option value="default">Select Site to change to</option>

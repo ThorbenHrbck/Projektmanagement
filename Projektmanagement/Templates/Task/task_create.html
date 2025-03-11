@@ -1,18 +1,19 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <title>Neuen Task erstellen</title>
-</head>
-<body>
-<h1>Neuen Task erstellen</h1>
+{% extends "baseTemplate.html" %}
 
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Task erstellen</button>
-</form>
+{% block content %}
+    {% if project %}
+        <h1>{{ project.name }}:</h1>
+    {% endif %}
+    <h2>Task erstellen</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Task erstellen</button>
+    </form>
 
-<p><a href="{% url 'project_overview' %}">Zurück zur Task-Liste</a></p>
-</body>
-</html>
+    {% if project %}
+        <p><a href="/tasks/{{ project.id }}">Back to Task Overview</a></p>
+    {% else %}
+        <p><a href="{% url 'project_overview' %}">Back to Project Overview</a></p>
+    {% endif %}
+{% endblock %}

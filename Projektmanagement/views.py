@@ -82,19 +82,42 @@ def task_overview(request, project_id):
         tasks = paginator.get_page(page_number)
     except Task.DoesNotExist:
         raise Http404("Tasklist empty")
-    return render(request, 'Task/TaskOverview.html', {'tasks': tasks, 'project': project, 'participants': participants})
+    return render(request, 'Task/task_overview.html',
+                  {'tasks': tasks, 'project': project, 'participants': participants})
 
 
-def task_create(request):
-    if request.method == 'POST':
+def task_create(request, project_id=None):
+    if project_id:
+        project = Project.objects.get(id=project_id)
+    else:
+        project = None
+
+    if request.method == "POST":
         form = TaskForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('tasks_overview')
+            task = form.save(commit=False)
+            if project:
+                task.project = project
+            task.save()
+            return redirect('tasks_overview', project_id=task.project.id)
     else:
-        form = TaskForm()
+        form = TaskForm(initial={'project': project} if project else {})
 
-    return render(request, 'Task/task_create.html', {'form': form})
+    return render(request, "Task/task_create.html", {"form": form, "project": project})
+
+
+def task_delete_page(request, task_id):
+    task = Task.objects.get(pk=task_id)
+    project = task.project
+    return render(request, 'Task/task_delete.html', {'task': task, 'project': project})
+
+
+def task_delete(request, task_id):
+    task = Task.objects.get(pk=task_id)
+    project = task.project
+    task.delete()
+    task.save()
+    return redirect('tasks_overview', project_id=project.id)
 
 
 def toggle_completed(request, task_id):
@@ -108,5 +131,5 @@ def user_view(request, user_id):
     try:
         user = User.objects.get(pk=user_id)
     except User.DoesNotExist:
-        raise Http404("Couldnt find user")
+        raise Http404("Could not find user")
     return user
