@@ -1,20 +1,16 @@
-<!-- templates/Project/ProjectUpdate.html -->
-{% extends "baseTemplate.html" %}
+    <!-- templates/Project/ProjectUpdate.html -->
+    {% extends "baseTemplate.html" %}
 
-{% block content %}
-<div class="container">
-    <h1>Projekt bearbeiten</h1>
-    <form method="post">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="name" class="form-label">Projektname</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{ project.name }}" required>
-        </div>
-        <div class="mb-3">
-            <label for="description" class="form-label">Beschreibung</label>
-            <textarea class="form-control" id="description" name="description" rows="3" required>{{ project.description }}</textarea>
-        </div>
-        <button type="submit" class="btn btn-success">Speichern</button>
-    </form>
-</div>
-{% endblock %}
+    {% block content %}
+    <div>
+        <h1 style="margin-left: 41%;">Update a project</h1>
+        <form method="post" action="{% url 'project_update' project.id %}">
+            {% csrf_token %}
+            {%include "Project/ProjectTextFields.html"%}
+            <div class="FormContainer">
+                <button type="submit" style="margin-left: 42.8%;">Update</button>
+                <button type="cancel" style="margin-left: 22.4%;" action="{% url 'project_overview' %}">Cancel</button>
+            </div>
+        </form>
+    </div>
+    {% endblock %}

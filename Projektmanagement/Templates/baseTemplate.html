@@ -39,32 +39,36 @@
         <img id="logo" src="{% static 'logo.png' %}" border="1" class="top-left-image">
     </a>
 
-    <select name="view_selecter" id="selecter">
-        <option value="default">Select Site to change to</option>
-        <option value="{% url 'project_overview' %}">Project Overview</option>
-        <option value="{% url 'project_create' %}">Project Create</option>
-        <option value="{% url 'project_update' %}">Project Update</option>
-        <option value="{% url 'project_delete' %}">Project Delete</option>
-    </select>
-    <script>
-        document.getElementById("selecter").addEventListener("change", function () {
-            let selectedUrl = this.value;
-            if (selectedUrl) {
-                window.location.href = selectedUrl;
-            }
-        });
-    </script>
+            <select name="view_selecter" id="selecter">
+                <option value="default">Select Site to change to</option>
+                <option value="{% url 'project_overview' %}">Project Overview</option>
+                <option value="{% url 'project_create' %}">Project Create</option>
+                {% if project and project.id %}
+                    <option value="{% url 'project_update' project.id %}">Project Update</option>
+                {% endif %}
+                {% if project and project.id %}
+                    <option value="{% url 'project_delete_new' project.id %}">Project Delete</option>
+                {% endif %}
+              </select>
+              <script>
+                document.getElementById("selecter").addEventListener("change", function() {
+                    let selectedUrl = this.value;
+                    if (selectedUrl) {
+                        window.location.href = selectedUrl;
+                    }
+                });
+                </script>
 
-    <h2 class="center">Projektmanagement</h2>
-</div>
-
-<!-- Hier wird der spezifische Inhalt der Seiten eingefügt -->
-{% block content %}
-{% endblock %}
-
-<!-- Optional: Footer -->
-<footer style="background-color: lightcoral; /* TODO: entfernen - nur für meine Übersicht. Steffi */">
-    <p>&copy; 2025 Projektmanagement</p>
-</footer>
-</body>
+            <h2 class="center">Projektmanagement</h2>
+        </div>
+    
+        <!-- Hier wird der spezifische Inhalt der Seiten eingefügt -->
+        {% block content %}
+        {% endblock %}
+        
+        <!-- Optional: Footer -->
+        <footer style="background-color: lightcoral; /* TODO: entfernen - nur für meine Übersicht. Steffi */">
+            <p>&copy; 2025 Projektmanagement</p>
+        </footer>
+    </body>
 </html>

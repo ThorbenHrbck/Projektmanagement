@@ -1,0 +1,17 @@
+<style>
+    .global-crud {
+    display: flex;
+    justify-content: center;
+    /* gap: 15%; */
+}
+</style>
+    <div class="global-crud">
+        <a href="{% url 'project_create' %}">
+            <button type="button">Add Project</button>
+        </a>
+        {% if projects.has_next %}
+            <a href="?page={{ projects.next_page_number }}">
+                <button type="button">Next Projects</button>
+            </a>
+        {% endif %}
+    </div>

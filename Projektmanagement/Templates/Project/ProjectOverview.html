@@ -1,47 +1,73 @@
 {% extends "baseTemplate.html" %}
 
 {% block content %}
-<div class="container">
-    <style>
-        .crud_container {
-            display: flex;
-            justify-content: center; /* Zentriert die Buttons horizontal */
-            gap: 15%; /* Abstand zwischen den Buttons in Prozent */
-        }
-    </style>
-    <div class="crud_container">
-        <a href="{% url 'project_create' %}">
-            <button>Add Project</button>
-        </a>
-        <a href="{% url 'project_delete' %}">
-            <button>Delete Project</button>
-        </a>
-        <a href="{% url 'project_update' %}">
-            <button>Update Project</button>
-        </a>
-        <a href="">
-            <button>Next Projects</button>
-        </a>
-    </div>
-
-    <div class="row mt-4">
-        <!-- Projektkarten oder Tabelle -->
-        <div class="col-md-12">
+<style>
+    /* Container für ein einzelnes Projekt */
+    .container {
+        border: 2px solid #000;
+        border-radius: 5px;
+        margin-bottom: 2%;
+        padding: 10px;
+        position: relative;
+    }
+    .row {
+        display: flex;
+        gap: 25%;
+        margin-top: 0.5%;
+    }
+    .text {
+        font-size: 15px;
+        margin: 5px;
+        line-height: 1.5;
+    }
+    /* Der klickbare Bereich für Projektdetails */
+    .project-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        /* Optional: beim Hover visuell hervorheben */
+    }
+    /* Bereich für die Aktions-Buttons (Update, Delete) */
+    .action-buttons {
+        margin-top: 10px;
+        display: flex;
+        gap: 10px;
+    }
+</style>
+<div>
+    {% include 'Project/Button.html' %}
+    <!-- Projektliste -->
+    {% for project in projects %}
+        {% if forloop.counter0|divisibleby:"3" %}
             <div class="row">
-                {% for project in projects %}
-                <div class="col-md-4">
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ project.name }}</h5>
-                            <p class="card-text">{{ project.description }}</p>
-                            <a href="{% url 'project_edit' project.id %}" class="btn btn-warning">Bearbeiten</a>
-                            <a href="{% url 'project_delete' project.id %}" class="btn btn-danger">Löschen</a>
-                        </div>
-                    </div>
+        {% endif %}
+        <div class="container">
+            <!-- Klickbarer Bereich: Führt zur Task Overview (tasks_overview erwartet project_id) -->
+            <a class="project-link" href="{% url 'tasks_overview' project.id %}">
+                <div class="entry">
+                    <h3 class="text">{{ project.name }}</h3>
+                    <p class="text">Start Date: {{ project.start_date }}</p>
+                    <p class="text">End Date: {{ project.end_date }}</p>
+                    <p class="text">Owner: {{ project.owner }}</p>
+                    <p class="text">Description: {{ project.notes }}</p>
                 </div>
-                {% endfor %}
+            </a>
+            <!-- Aktions-Buttons: Update und Delete -->
+            <div class="action-buttons">
+                <a href="{% url 'project_update' project.id %}">
+                    <button type="button">Update</button>
+                </a>
+                <a href="{% url 'project_delete_new' project.id %}">
+                    <button type="button">Delete</button>
+                </a>
             </div>
         </div>
-    </div>
+        {% if forloop.counter|divisibleby:"3" or forloop.last %}
+            </div>
+        {% endif %}
+    {% empty %}
+        <p>Keine Einträge vorhanden.</p>
+    {% endfor %}
+    {% include 'Project/Button.html' %}
 </div>
 {% endblock %}

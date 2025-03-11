@@ -3,12 +3,18 @@
 
 {% block content %}
 <div class="container">
-    <h1>Projekt löschen</h1>
-    <p>Möchten Sie das Projekt <strong>{{ project.name }}</strong> wirklich löschen?</p>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Löschen</button>
-        <a href="{% url 'project_overview' %}" class="btn btn-secondary">Abbrechen</a>
-    </form>
+    <h1 style="margin-left: 40%; margin-right: 40%; text-align: center;">Projekt löschen</h1>
+    <div>
+        <p class="PCentered" style="font-size: 25px;">Projektname</p>
+        <p class="PCentered">Projektbeschreibung</p>
+    </div>
+    <div style="margin-top: 7%;">
+        <p class="PCentered">Möchten Sie das Projekt X wirklich löschen?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" style="margin-left: 35%;">Löschen</button>
+            <button type="submit" style="margin-left: 10%;">Abbrechen</button>
+        </form>
+    </div>
 </div>
 {% endblock %}
