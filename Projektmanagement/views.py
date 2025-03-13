@@ -15,7 +15,7 @@ def project_overview(request):
     paginator = Paginator(all_projects, 6)
     page_number = request.GET.get('page')
     projects = paginator.get_page(page_number)
-    return render(request, 'Project/ProjectOverview.html', {'projects' : projects})
+    return render(request, 'Project/ProjectOverview.html', {'projects': projects})
 
 
 def project_update(request, id):
@@ -39,6 +39,7 @@ def project_update(request, id):
 def project_create(request):
     return render(request, 'Project/ProjectCreate.html')
 
+
 def project_create_submission(request):
     project_name = request.POST.get("ProjectName")
     project_start_date = request.POST.get("ProjectStartDate")
@@ -47,13 +48,16 @@ def project_create_submission(request):
     project_description = request.POST.get("ProjectDescription")
     try:
         user = User.objects.get(firstName=project_owner_name)
-        Project.objects.create(name=project_name, start_date=project_start_date, end_date=project_end_date, notes=project_description, owner=user)
+        Project.objects.create(name=project_name, start_date=project_start_date, end_date=project_end_date,
+                               notes=project_description, owner=user)
     except User.DoesNotExist:
         print("Unable")
     return project_create(request)
 
+
 def project_delete(request):
     return render(request, 'Project/ProjectDelete.html')
+
 
 def project_delete_new(request, id):
     project = get_object_or_404(Project, id=id)
@@ -113,10 +117,9 @@ def task_delete_page(request, task_id):
 
 
 def task_delete(request, task_id):
-    task = Task.objects.get(pk=task_id)
+    task = get_object_or_404(Task, id=task_id)
     project = task.project
     task.delete()
-    task.save()
     return redirect('tasks_overview', project_id=project.id)
 
 
