@@ -11,6 +11,13 @@
             border: black solid 2px;
         }
 
+        .task_button_container {
+            display: grid;
+            grid-template-columns:30% 30% 30%;
+            grid-gap: 10px;
+            padding: 10px;
+        }
+
         .update_btn {
             background: darkseagreen;
         }
@@ -21,16 +28,26 @@
     </style>
 
     <div>
-        <div style="display: grid">
-            <h2>Task Overview: <a style="color: black" href="/projects">{{ project.name }}</a></h2>
-            <a href="/task/create/{{ project.id }}">
+        <h2 class="center">Task Overview: <a style="color: black" href="/projects">{{ project.name }}</a></h2>
+        <div class="task_button_container">
+            {% if tasks.has_previous %}
+                <a style="justify-self: flex-start" href="?page={{ tasks.previous_page_number }}">
+                    <button><< Previous Tasks</button>
+                </a>
+            {% else %}
+                <p></p>
+            {% endif %}
+            <a style="justify-self: center" href="/task/create/{{ project.id }}">
                 <button>Add Task</button>
             </a>
             {% if tasks.has_next %}
-                <a style="justify-self: flex-end" href="?page={{ task.next_page_number }}">
+                <a style="justify-self: flex-end" href="?page={{ tasks.next_page_number }}">
                     <button>Next Tasks >></button>
                 </a>
+            {% else %}
+                <p></p>
             {% endif %}
+
         </div>
         <br>
 
