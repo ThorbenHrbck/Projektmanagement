@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Projektmanagement</title>
     <style>
@@ -31,14 +31,28 @@
             width: 40%;
             padding: 6px;
         }
+
+        /* wird von forms genutzt, auch wenn man das hier nicht direkt sieht*/
+        #id_participants {
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+
+        .participant-box > * {
+            flex: 1 1 80px;
+        }
+
     </style>
 </head>
 <body>
 <div class="header-container">
     <a href="{% url 'main' %}">
-        <img id="logo" src="{% static 'logo.png' %}" border="1" class="top-left-image">
+        <img id="logo" src="{% static 'logo.png' %}" class="top-left-image" alt="Logo of the Application">
     </a>
 
+    <label for="selecter"></label>
     <select name="view_selecter" id="selecter">
         <option value="default">Select Site to change to</option>
         <option value="{% url 'project_overview' %}">Project Overview</option>

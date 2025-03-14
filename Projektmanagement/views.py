@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator
-from django.http import Http404, JsonResponse
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 from Projektmanagement.forms import TaskForm, UpdateTaskForm
@@ -18,8 +18,8 @@ def project_overview(request):
     return render(request, 'Project/ProjectOverview.html', {'projects': projects})
 
 
-def project_update(request, id):
-    project = get_object_or_404(Project, id=id)
+def project_update(request, project_id):
+    project = get_object_or_404(Project, id=project_id)
 
     if request.method == "POST":
         project.name = request.POST.get("ProjectName")
@@ -51,7 +51,7 @@ def project_create_submission(request):
         Project.objects.create(name=project_name, start_date=project_start_date, end_date=project_end_date,
                                notes=project_description, owner=user)
     except User.DoesNotExist:
-        print("Unable")
+        render(request, "error.html")
     return project_create(request)
 
 
@@ -59,12 +59,23 @@ def project_delete(request):
     return render(request, 'Project/ProjectDelete.html')
 
 
-def project_delete_new(request, id):
-    project = get_object_or_404(Project, id=id)
+def project_delete_new(request, project_id):
+    project = get_object_or_404(Project, id=project_id)
     if request.method == "POST":
         project.delete()
         return redirect('project_overview')
     return render(request, 'Project/ProjectDelete.html', {'project': project})
+
+
+def task_overview(request, project_id):
+    project = Project.objects.get(id=project_id)
+    all_tasks = Task.objects.filter(project=project_id).order_by('created_date')
+    combined_tasks = combine_tasks_with_participants(all_tasks)
+    paginator = Paginator(combined_tasks, 6)
+    page_number = request.GET.get('page')
+    tasks = paginator.get_page(page_number)
+    return render(request, 'Task/task_overview.html',
+                  {'tasks': tasks, 'project': project})
 
 
 def task_update(request, task_id):
@@ -78,18 +89,6 @@ def task_update(request, task_id):
         form = UpdateTaskForm(instance=task)
 
     return render(request, "Task/task_update.html", {"form": form, "task": task})
-
-
-def task_overview(request, project_id):
-    project = Project.objects.get(id=project_id)
-    participants = User.objects.filter(project=project_id)
-
-    all_tasks = Task.objects.filter(project=project_id).order_by('created_date')
-    paginator = Paginator(all_tasks, 6)
-    page_number = request.GET.get('page')
-    tasks = paginator.get_page(page_number)
-    return render(request, 'Task/task_overview.html',
-                  {'tasks': tasks, 'project': project, 'participants': participants})
 
 
 def task_create(request, project_id=None):
@@ -142,3 +141,19 @@ def user_view(request, user_id):
 
 def error(request):
     return render(request, 'error.html')
+
+
+def get_participants(all_tasks):
+    participants = {}
+    for task in all_tasks:
+        participants_set = task.participants.all()
+        participants[task] = participants_set
+    return participants
+
+
+def combine_tasks_with_participants(all_tasks):
+    result = []
+    for task in all_tasks:
+        new_task = {"task": task, "participants": task.participants.all()}
+        result.append(new_task)
+    return result
