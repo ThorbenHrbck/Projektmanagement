@@ -81,16 +81,13 @@ def task_update(request, task_id):
 
 
 def task_overview(request, project_id):
-    try:
-        project = Project.objects.get(id=project_id)
-        participants = User.objects.filter(project=project_id)
+    project = Project.objects.get(id=project_id)
+    participants = User.objects.filter(project=project_id)
 
-        all_tasks = Task.objects.filter(project=project_id).order_by('created_date')
-        paginator = Paginator(all_tasks, 6)
-        page_number = request.GET.get('page')
-        tasks = paginator.get_page(page_number)
-    except Task.DoesNotExist:
-        return redirect('error')
+    all_tasks = Task.objects.filter(project=project_id).order_by('created_date')
+    paginator = Paginator(all_tasks, 6)
+    page_number = request.GET.get('page')
+    tasks = paginator.get_page(page_number)
     return render(request, 'Task/task_overview.html',
                   {'tasks': tasks, 'project': project, 'participants': participants})
 
