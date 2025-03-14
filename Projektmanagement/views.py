@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator
-from django.http import Http404, JsonResponse
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 from Projektmanagement.forms import TaskForm, UpdateTaskForm
@@ -18,8 +18,8 @@ def project_overview(request):
     return render(request, 'Project/ProjectOverview.html', {'projects': projects})
 
 
-def project_update(request, id):
-    project = get_object_or_404(Project, id=id)
+def project_update(request, project_id):
+    project = get_object_or_404(Project, id=project_id)
 
     if request.method == "POST":
         project.name = request.POST.get("ProjectName")
@@ -59,8 +59,8 @@ def project_delete(request):
     return render(request, 'Project/ProjectDelete.html')
 
 
-def project_delete_new(request, id):
-    project = get_object_or_404(Project, id=id)
+def project_delete_new(request, project_id):
+    project = get_object_or_404(Project, id=project_id)
     if request.method == "POST":
         project.delete()
         return redirect('project_overview')

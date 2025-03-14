@@ -17,11 +17,12 @@ class TaskForm(forms.ModelForm):
         queryset=User.objects.all(),
         widget=forms.CheckboxSelectMultiple,
         required=False,
+
     )
 
     project = forms.ModelChoiceField(
         queryset=Project.objects.all(),
-        widget=forms.Select(attrs={'class': 'form-control'})
+        widget=forms.Select
     )
 
     start_date = fields.DateTimeField(
@@ -53,7 +54,7 @@ class UpdateTaskForm(forms.ModelForm):
         fields = ['name', 'done', 'start_date', 'end_date', 'description', 'participants', 'project']
 
     participants = forms.ModelMultipleChoiceField(
-        queryset=User.objects.all(),
+        queryset=User.objects.all().order_by('firstName'),
         widget=forms.CheckboxSelectMultiple,
         required=False, )
 
@@ -67,7 +68,7 @@ class UpdateTaskForm(forms.ModelForm):
 
     project = forms.ModelChoiceField(
         queryset=Project.objects.all(),
-        widget=forms.Select(attrs={'class': 'form-control'})
+        widget=forms.Select
     )
 
     def clean(self):
