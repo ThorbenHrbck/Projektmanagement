@@ -36,4 +36,5 @@ urlpatterns = [
     path('task/update/<int:task_id>', views.task_update, name='task_update'),
     path('user/<int:id>/', views.user_view, name='user'),
     path('toggle_completed/<int:task_id>/', views.toggle_completed, name='toggle_completed'),
+    path('error', views.error, name='error'),
 ]

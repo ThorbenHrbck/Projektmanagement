@@ -2,7 +2,7 @@ from django.core.paginator import Paginator
 from django.http import Http404, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
-from Projektmanagement.forms import TaskForm
+from Projektmanagement.forms import TaskForm, UpdateTaskForm
 from Projektmanagement.models import Task, Project, User
 
 
@@ -68,10 +68,13 @@ def project_delete_new(request, id):
 
 
 def task_update(request, task_id):
-    try:
-        task = Task.objects.get(pk=task_id)
-    except Task.DoesNotExist:
-        raise Http404("Task not found")
+    task = get_object_or_404(Task, id=task_id)
+    form = UpdateTaskForm(request.POST)
+    print(form)
+    if form.is_valid():
+        print("Hier auch?")
+        form.save()
+        return redirect('project_overview')
     return render(request, 'Task/task_update.html', {'task': task})
 
 
@@ -136,3 +139,7 @@ def user_view(request, user_id):
     except User.DoesNotExist:
         raise Http404("Could not find user")
     return user
+
+
+def error(request):
+    return render(request, 'error.html')

@@ -3,11 +3,11 @@
 
 {% block content %}
     <div class="container">
-        <h1>Task bearbeiten</h1>
-        <form method="post">
+        <h1>Update Task {{ task.name }} </h1>
+        <form method="POST">
             {% csrf_token %}
-            {{ task.name }}
-            <button type="submit" class="btn btn-success">Speichern</button>
+            {{ form.as_p }}
+            <button type="submit">Update Task</button>
         </form>
     </div>
 {% endblock %}
