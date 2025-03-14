@@ -37,28 +37,7 @@
     <a href="{% url 'main' %}">
         <img id="logo" src="{% static 'logo.png' %}" border="1" class="top-left-image">
     </a>
-
-    <select name="view_selecter" id="selecter">
-        <option value="default">Select Site to change to</option>
-        <option value="{% url 'project_overview' %}">Project Overview</option>
-        <option value="{% url 'project_create' %}">Project Create</option>
-        {% if project and project.id %}
-            <option value="{% url 'project_update' project.id %}">Project Update</option>
-        {% endif %}
-        {% if project and project.id %}
-            <option value="{% url 'project_delete_new' project.id %}">Project Delete</option>
-        {% endif %}
-    </select>
-    <script>
-        document.getElementById("selecter").addEventListener("change", function () {
-            let selectedUrl = this.value;
-            if (selectedUrl) {
-                window.location.href = selectedUrl;
-            }
-        });
-    </script>
-
-    <h2 class="center">Projektmanagement</h2>
+    <h2 class="center">{{ project.name }}</h2>
 </div>
 
 <!-- Hier wird der spezifische Inhalt der Seiten eingefügt -->

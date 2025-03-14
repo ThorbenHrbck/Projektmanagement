@@ -1,6 +1,5 @@
 <!-- templates/Task/TaskOverview.html -->
-{% extends "baseTemplate.html" %}
-
+{% extends "Task/task_base_template.html" %}
 {% block content %}
 
     <style>
@@ -67,8 +66,7 @@
                     </span>
 
                         <div>
-                            <a class=update_btn>Update
-                            </a>
+                            <a class=update_btn href="{% url 'task_update' task.id %}">Update</a>
                             <a class=delete_btn href="{% url 'task_delete_page' task.id %}">Delete</a>
                         </div>
                     </div>
