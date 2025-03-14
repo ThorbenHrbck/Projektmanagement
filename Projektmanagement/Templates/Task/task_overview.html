@@ -61,21 +61,22 @@
                 </style>
                 {% for task in tasks %}
                     <div class="task">
-                        <h3>{{ task.name }}</h3>
+                        <h3>{{ task.task.name }}</h3>
                         <div style=>
                             <div>Starts: {{ task.start_date|date:"d.m.Y" }}</div>
                             <select name="participants" id="participants">
                                 <option value="default">Participants</option>
-                                {% for participant in participants %}
-                                    <option value="{% url 'user' participant.id %}">{{ participant }}</option>
+
+                                {% for participant in task.participants %}
+                                    <option value="{% url 'user' participant.id %}">{{ participant.firstName }} {{ participant.lastName }}</option>
                                 {% endfor %}
                             </select>
                             <div>Ends: {{ task.end_date|date:"d.m.Y" }}</div>
                         </div>
-                        <div>Details: <span>{{ task.description }}</span></div>
+                        <div>Details: <span>{{ task.task.description }}</span></div>
                         <span class="task-status"
-                              data-task-id="{{ task.id }}"
-                                {% if task.done %}
+                              data-task-id="{{ task.task.id }}"
+                                {% if task.task.done %}
                               class="text-success" style="cursor: pointer;">Done: ✅
                                 {% else %}
                                     class="text-danger" style="cursor: pointer;">Done: ❌
@@ -83,8 +84,8 @@
                     </span>
 
                         <div>
-                            <a class=update_btn href="{% url 'task_update' task.id %}">Update</a>
-                            <a class=delete_btn href="{% url 'task_delete_page' task.id %}">Delete</a>
+                            <a class=update_btn href="{% url 'task_update' task.task.id %}">Update</a>
+                            <a class=delete_btn href="{% url 'task_delete_page' task.task.id %}">Delete</a>
                         </div>
                     </div>
                 {% endfor %}
