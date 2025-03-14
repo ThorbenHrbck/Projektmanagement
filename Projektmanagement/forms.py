@@ -52,8 +52,11 @@ class UpdateTaskForm(forms.ModelForm):
         model = Task
         fields = ['name', 'done', 'start_date', 'end_date', 'description', 'participants', 'project']
 
-    participants = forms.ModelMultipleChoiceField(queryset=User.objects.all(),
-                                                  widget=forms.CheckboxSelectMultiple)
+    participants = forms.ModelMultipleChoiceField(
+        queryset=User.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False, )
+
     start_date = fields.DateField(
         widget=DateInput,
         required=False, )

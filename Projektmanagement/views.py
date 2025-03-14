@@ -32,7 +32,7 @@ def project_update(request, id):
             project.save()
             return redirect('project_overview')
         except User.DoesNotExist:
-            print("Unable")
+            render(request, "error.html")
     return render(request, "Project/ProjectUpdate.html", {"project": project})
 
 
@@ -69,13 +69,15 @@ def project_delete_new(request, id):
 
 def task_update(request, task_id):
     task = get_object_or_404(Task, id=task_id)
-    form = UpdateTaskForm(request.POST)
-    print(form)
-    if form.is_valid():
-        print("Hier auch?")
-        form.save()
-        return redirect('project_overview')
-    return render(request, 'Task/task_update.html', {'task': task})
+    if request.method == "POST":
+        form = UpdateTaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('tasks_overview', project_id=task.project.id)
+    else:
+        form = UpdateTaskForm(instance=task)
+
+    return render(request, "Task/task_update.html", {"form": form, "task": task})
 
 
 def task_overview(request, project_id):
@@ -88,7 +90,7 @@ def task_overview(request, project_id):
         page_number = request.GET.get('page')
         tasks = paginator.get_page(page_number)
     except Task.DoesNotExist:
-        raise Http404("Tasklist empty")
+        return redirect('error')
     return render(request, 'Task/task_overview.html',
                   {'tasks': tasks, 'project': project, 'participants': participants})
 
@@ -114,7 +116,7 @@ def task_create(request, project_id=None):
 
 
 def task_delete_page(request, task_id):
-    task = Task.objects.get(pk=task_id)
+    task = get_object_or_404(Task, id=task_id)
     project = task.project
     return render(request, 'Task/task_delete.html', {'task': task, 'project': project})
 
@@ -137,7 +139,7 @@ def user_view(request, user_id):
     try:
         user = User.objects.get(pk=user_id)
     except User.DoesNotExist:
-        raise Http404("Could not find user")
+        return redirect('error')
     return user
 
 
