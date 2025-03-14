@@ -67,7 +67,7 @@
                     </span>
 
                         <div>
-                            <a class=update_btn>Update
+                            <a class=update_btn href="{% url 'task_update' task.id %}">Update
                             </a>
                             <a class=delete_btn href="{% url 'task_delete_page' task.id %}">Delete</a>
                         </div>

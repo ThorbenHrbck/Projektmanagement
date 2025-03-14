@@ -67,12 +67,12 @@ def project_delete_new(request, id):
     return render(request, 'Project/ProjectDelete.html', {'project': project})
 
 
-def task_detail(request, task_id):
+def task_update(request, task_id):
     try:
         task = Task.objects.get(pk=task_id)
     except Task.DoesNotExist:
         raise Http404("Task not found")
-    return render(request, 'Task/TaskTemplate.html', {'task': task})
+    return render(request, 'Task/task_update.html', {'task': task})
 
 
 def task_overview(request, project_id):
