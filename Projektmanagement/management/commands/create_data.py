@@ -92,12 +92,120 @@ class Command(BaseCommand):
 
         task9 = Task.objects.create(project=project4, name="Aufgabe 9", start_date=timezone.now(),
                                     end_date=timezone.now() + timezone.timedelta(days=10),
-                                    description="Beschreibung der Aufgabe 7",
+                                    description="Beschreibung der Aufgabe 9",
                                     project_id=project4.id)
         task9.participants.set({user3, user4})
 
-        task10 = Task.objects.create(project=project4, name="Aufgabe 9", start_date=timezone.now(),
+        task10 = Task.objects.create(project=project4, name="Aufgabe 10", start_date=timezone.now(),
                                      end_date=timezone.now() + timezone.timedelta(days=10),
-                                     description="Beschreibung der Aufgabe 7",
+                                     description="Beschreibung der Aufgabe 10",
                                      project_id=project4.id)
         task10.participants.set({user1, user2, user3, user4})
+
+        task11 = Task.objects.create(project=project5, name="Aufgabe 11", start_date=timezone.now(),
+                                     end_date=timezone.now() + timezone.timedelta(days=20),
+                                     description="Beschreibung der Aufgabe 11",
+                                     project_id=project5.id)
+        task11.participants.set({user1, user2})
+
+        task12 = Task.objects.create(project=project5, name="Aufgabe 12", start_date=timezone.now(),
+                                     end_date=timezone.now() + timezone.timedelta(days=50),
+                                     description="Beschreibung der Aufgabe 12",
+                                     project_id=project5.id)
+        task12.participants.set({user2, user3})
+
+        task13 = Task.objects.create(project=project6, name="Aufgabe 13", start_date=timezone.now(),
+                                     end_date=timezone.now() + timezone.timedelta(days=30),
+                                     description="Beschreibung der Aufgabe 13",
+                                     project_id=project6.id)
+        task13.participants.set({user1, user3, user4})
+
+        task14 = Task.objects.create(project=project6, name="Aufgabe 14", start_date=timezone.now(),
+                                     end_date=timezone.now() + timezone.timedelta(days=25),
+                                     description="Beschreibung der Aufgabe 14",
+                                     project_id=project6.id)
+        task14.participants.set({user2, user4})
+
+        task15 = Task.objects.create(project=project7, name="Aufgabe 15", start_date=timezone.now(),
+                                     end_date=timezone.now() + timezone.timedelta(days=15),
+                                     description="Beschreibung der Aufgabe 15",
+                                     project_id=project7.id)
+        task15.participants.set({user1, user4})
+
+        task16 = Task.objects.create(project=project7, name="Aufgabe 16", start_date=timezone.now(),
+                                     end_date=timezone.now() + timezone.timedelta(days=40),
+                                     description="Beschreibung der Aufgabe 16",
+                                     project_id=project7.id)
+        task16.participants.set({user2, user3})
+
+        task17 = Task.objects.create(project=project7, name="Aufgabe 17", start_date=timezone.now(),
+                                     end_date=timezone.now() + timezone.timedelta(days=60),
+                                     description="Beschreibung der Aufgabe 17",
+                                     project_id=project7.id)
+        task17.participants.set({user1, user2, user4})
+
+        task18 = Task.objects.create(project=project7, name="Aufgabe 18", start_date=timezone.now(),
+                                     end_date=timezone.now() + timezone.timedelta(days=10),
+                                     description="Beschreibung der Aufgabe 18",
+                                     project_id=project7.id)
+        task18.participants.set({user3, user4})
+
+        task19 = Task.objects.create(project=project7, name="Aufgabe 19", start_date=timezone.now(),
+                                     end_date=timezone.now() + timezone.timedelta(days=10),
+                                     description="Beschreibung der Aufgabe 19",
+                                     project_id=project7.id)
+        task19.participants.set({user1, user2})
+
+        task20 = Task.objects.create(project=project7, name="Aufgabe 20", start_date=timezone.now(),
+                                     end_date=timezone.now() + timezone.timedelta(days=30),
+                                     description="Beschreibung der Aufgabe 20",
+                                     project_id=project7.id)
+        task20.participants.set({user3, user4})
+
+        task21 = Task.objects.create(project=project7, name="Aufgabe 21", start_date=timezone.now(),
+                                     end_date=timezone.now() + timezone.timedelta(days=20),
+                                     description="Beschreibung der Aufgabe 21",
+                                     project_id=project7.id)
+        task21.participants.set({user1, user3})
+
+        task22 = Task.objects.create(project=project7, name="Aufgabe 22", start_date=timezone.now(),
+                                     end_date=timezone.now() + timezone.timedelta(days=15),
+                                     description="Beschreibung der Aufgabe 22",
+                                     project_id=project7.id)
+        task22.participants.set({user2, user4})
+
+        task23 = Task.objects.create(project=project7, name="Aufgabe 23", start_date=timezone.now(),
+                                     end_date=timezone.now() + timezone.timedelta(days=25),
+                                     description="Beschreibung der Aufgabe 23",
+                                     project_id=project7.id)
+        task23.participants.set({user1, user2, user3})
+
+        task24 = Task.objects.create(project=project7, name="Aufgabe 24", start_date=timezone.now(),
+                                     end_date=timezone.now() + timezone.timedelta(days=35),
+                                     description="Beschreibung der Aufgabe 24",
+                                     project_id=project7.id)
+        task24.participants.set({user3, user4})
+
+        task25 = Task.objects.create(project=project7, name="Aufgabe 25", start_date=timezone.now(),
+                                     end_date=timezone.now() + timezone.timedelta(days=40),
+                                     description="Beschreibung der Aufgabe 25",
+                                     project_id=project7.id)
+        task25.participants.set({user1, user4})
+
+        task26 = Task.objects.create(project=project7, name="Aufgabe 26", start_date=timezone.now(),
+                                     end_date=timezone.now() + timezone.timedelta(days=30),
+                                     description="Beschreibung der Aufgabe 26",
+                                     project_id=project7.id)
+        task26.participants.set({user2, user3})
+
+        task27 = Task.objects.create(project=project7, name="Aufgabe 27", start_date=timezone.now(),
+                                     end_date=timezone.now() + timezone.timedelta(days=20),
+                                     description="Beschreibung der Aufgabe 27",
+                                     project_id=project7.id)
+        task27.participants.set({user1, user3})
+
+        task28 = Task.objects.create(project=project7, name="Aufgabe 28", start_date=timezone.now(),
+                                     end_date=timezone.now() + timezone.timedelta(days=10),
+                                     description="Beschreibung der Aufgabe 28",
+                                     project_id=project7.id)
+        task28.participants.set({user2, user4})
