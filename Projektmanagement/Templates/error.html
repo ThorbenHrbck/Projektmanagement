@@ -1,0 +1,16 @@
+{% extends "baseTemplate.html" %}
+
+{% block content %}
+    <style>
+        .container {
+            display: grid;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+
+    <div class="container"><h1>Ups! Something went wrong...</h1></div>
+    <p class="container">
+        <a href="{% url 'project_overview' %}" style="font-size: large">Back to Project Overview</a>
+    </p>
+{% endblock %}
