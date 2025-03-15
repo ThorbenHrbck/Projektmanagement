@@ -5,13 +5,13 @@
 <div class="container">
     <h1 style="margin-left: 40%; margin-right: 40%; text-align: center;">Projekt löschen</h1>
     <div>
-        <p class="PCentered" style="font-size: 25px;">Projektname</p>
-        <p class="PCentered">Projektbeschreibung</p>
+        <p class="PCentered" style="font-size: 25px;">{{ project.name }}</p>
+        <p class="PCentered">{{project.notes}}</p>
     </div>
     <div style="margin-top: 7%;">
-        <p class="PCentered">Möchten Sie das Projekt X wirklich löschen?</p>
-        <form method="post">
+        <form method="post" action="{% url 'project_delete_submission' project.id %}">
             {% csrf_token %}
+            <p class="PCentered">Möchten Sie das Projekt {{project.name}} wirklich löschen?</p>
             <button type="submit" style="margin-left: 35%;">Löschen</button>
             <button type="submit" style="margin-left: 10%;">Abbrechen</button>
         </form>

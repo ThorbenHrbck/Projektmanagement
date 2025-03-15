@@ -9,6 +9,9 @@ from Projektmanagement.models import Task, Project, User
 def main_view(request):
     return render(request, 'baseTemplate.html')
 
+def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('projects/')
 
 def project_overview(request):
     all_projects = Project.objects.all()
@@ -52,8 +55,13 @@ def project_create_submission(request):
         print("Unable")
     return project_create(request)
 
-def project_delete(request):
-    return render(request, 'Project/ProjectDelete.html')
+def project_delete(request, id):
+    project = get_object_or_404(Project, id=id)
+    return render(request, 'Project/ProjectDelete.html', {"project": project})
+
+def project_delete_submission(request, id):
+    Project.objects.get(id=id).delete()
+    return project_overview(request)
 
 
 def task_detail(request, task_id):

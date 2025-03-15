@@ -17,15 +17,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Projektmanagement import views
+from django.contrib.auth import views as auth_views # For login / logout
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('', views.main_view, name='main'),
+    path('login/', auth_views.LoginView.as_view(template_name='loginLogout/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
     path('projects/', views.project_overview, name='project_overview'),
     path('projects/create', views.project_create, name='project_create'),
     path('projects/create/submission', views.project_create_submission, name="project_create_submission"),
     path('projects/update/<int:id>/', views.project_update, name='project_update'),
-    path('projects/delete', views.project_delete, name='project_delete'),
+    path('projects/delete/<int:id>/', views.project_delete, name='project_delete'),
+    path('projects/delete/submission/<int:id>', views.project_delete_submission, name="project_delete_submission"),
     path('task/<int:task_id>', views.task_detail, name='task'),
     path('tasks/<int:project_id>', views.task_overview, name='tasks_overview'),
     path('task/create/', views.task_create, name='task_create'),
