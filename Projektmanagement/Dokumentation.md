@@ -1,5 +1,6 @@
 1. Projekt:
 1.1 Projekt Übersicht
+Um auf diese Seite zu kommen, kann man das Logo oben link in der ecke oder im Dropdown daneben auf Project Overview drücken.
 Dient der ÜBersicht für alle erstellten Projekte. Dabei werden Name des Projektes als fettgeschriebene Überschrift, Start- und Enddatum, Besitzer des Projektes und eine Projektbeschreibung angezeigt. Die Projektbeschreibung ist dabei ein Feld mit einer maximalgröße von 20 Zeichen, damit dessen größe das Designe nicht zu groß verändert, da es ansonsten das div vergrößern würde. Innerhalb der anzeige von einem Projekt gibt es noch einen Update und delete button, welchen zu den jeweiligen Templates mit den übergebenen Projekten führt. Sollten mehr als 6 Projekte vorhanden sein werden diese nicht auf der gleichen Seite angezeigt, sondern es wird ein button (beschreibung 1.1.2) angezeigt, welcher die nächsten 6 Projekte lädt. Auf der nächsten Seite wird dann auch ein Button zum zurückkehren auf die vorherige Seite angezeigt.
 Neben den Buttons zur Navigation wird ein Button zum erstellen eines Projektes angezeigt, welcher zum Template für diese Aufgabe führt.
 1.1.2 Button.html
