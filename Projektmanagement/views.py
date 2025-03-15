@@ -1,3 +1,5 @@
+from tkinter.font import names
+
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
@@ -19,7 +21,7 @@ def login_view(request):
 
 
 def project_overview(request):
-    all_projects = Project.objects.all()
+    all_projects = Project.objects.all().order_by(id)
     paginator = Paginator(all_projects, 6)
     page_number = request.GET.get('page')
     projects = paginator.get_page(page_number)
