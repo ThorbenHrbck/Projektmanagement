@@ -1,0 +1,34 @@
+{% extends "baseTemplate.html" %}
+
+{% block content %}
+    <style>
+        .container {
+            display: grid;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .middle {
+            padding: 30px 30px 30px 60px;
+            font-size: large;
+        }
+    </style>
+
+    <div class="container"><h1>Welcome to Project Management</h1></div>
+    <div class="middle">
+        On the following Pages you can:
+        <ul>
+            <li>Create new Projects</li>
+            <li>Create Tasks in Projects</li>
+            <li>Select who works on Tasks</li>
+            <li>Change up Projects</li>
+            <li>much more!</li>
+
+        </ul>
+    </div>
+    <p class="container">
+        <a href="{% url 'project_overview' %}" style="font-size: large">
+            <button>Get Started!</button>
+        </a>
+    </p>
+{% endblock %}

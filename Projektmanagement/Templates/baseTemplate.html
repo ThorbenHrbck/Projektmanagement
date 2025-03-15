@@ -1,50 +1,65 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Projektmanagement</title>
-        <style>
-            .header-container{
-                display: flex;
-                align-items: center; /* Vertikale Zentrierung */
-                justify-content: space-between; /* Abstand zwischen Logo und Titel */
-                background-color: lightcoral;
-            }
-             .top-left-image {   /* set the size of the logo */
-                width: 80px;
-                height: 60px;
-            }
-            .center{    /* Set the style of the Name in the middle of the top div */
-                flex-grow: 1;
-                text-align: center;
-            }
-        </style>
-    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
-    </head>
-    <body>
-        <div class="header-container">
-            <a href="{% url 'project_overview' %}">
-                <img id="logo" src="{% static 'logo.png' %}" border="1" class="top-left-image">
-            </a>
-            <form method="get" action="{% url 'main' %}">
-                <select name="destination" onchange="this.form.submit()">
-                    <option value="default">Select Site to change to</option>
-                    <option value="{% url 'project_overview' %}">Project Overview</option>
-                    <option value="{% url 'project_create' %}">Project Create</option>
-                </select>
-            </form>
-            <h2 class="center">Projektmanagement</h2>
+<head>
+    <title>Projektmanagement</title>
+    <style>
+        .header-container {
+            display: flex;
+            align-items: center; /* Vertikale Zentrierung */
+            justify-content: space-between; /* Abstand zwischen Logo und Titel */
+            background-color: lightcoral;
+            margin: 5px 5px 10px;
+        }
 
-            <!-- Logout button -->
-            <form method="post" action="{% url 'logout' %}">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-danger" style="margin-right: 5px;">Logout</button>
-            </form>
-        </div>
-        {% block content %}
-        {% endblock %}
-        <footer style="background-color: lightcoral;">
-            <p>&copy; 2025 Projektmanagement</p>
-        </footer>
-    </body>
+        .top-left-image { /* set the size of the logo */
+            width: 80px;
+            height: 60px;
+        }
+
+        .cc-image { /* set the size of the logo */
+            width: 80px;
+            height: 30px;
+        }
+
+        .center { /* Set the style of the Name in the middle of the top div */
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .footer {
+            background-color: lightcoral;
+            padding: 2px;
+            margin: 10px 5px 5px;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+<div class="header-container">
+    <a href="{% url 'project_overview' %}">
+        <img id="logo" src="{% static 'logo.png' %}" class="top-left-image">
+    </a>
+    <form method="get" action="{% url 'main' %}">
+        <select name="destination" onchange="this.form.submit()">
+            <option value="default">Select Site to change to</option>
+            <option value="{% url 'project_overview' %}">Project Overview</option>
+            <option value="{% url 'project_create' %}">Project Create</option>
+        </select>
+    </form>
+    <h2 class="center">Projectmanagement</h2>
+
+    <!-- Logout button -->
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger" style="margin-right: 5px;">Logout</button>
+    </form>
+</div>
+{% block content %}
+{% endblock %}
+<footer class="footer">
+    <img id="cc" src="{% static 'CC_BY_NC.png' %}" class="cc-image" alt="Creative Commons Licence CC BY NC">
+</footer>
+</body>
 </html>
+
