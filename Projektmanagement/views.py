@@ -53,7 +53,6 @@ def project_create_submission(request):
     project_start_date = request.POST.get("ProjectStartDate")
     project_end_date = request.POST.get("ProjectEndDate")
     project_owner_name = request.POST.get("ProjectOwner").split(" ")[0]
-    print(project_owner_name)
     project_description = request.POST.get("ProjectDescription")
     try:
         user = User.objects.get(id=project_owner_name)
