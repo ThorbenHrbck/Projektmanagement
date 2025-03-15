@@ -64,7 +64,7 @@
             <div class="task_container">
                 {% for task in tasks %}
                     <div class="task">
-                        <h3>{{ task.task.name }}</h3>
+                        <h3 class="text">{{ task.task.name }}</h3>
                         <div style=>
                             <div>Starts: {{ task.start_date|date:"d.m.Y" }}</div>
                             <select name="participants" id="participants">

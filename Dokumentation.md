@@ -139,23 +139,55 @@ wird als Verifizierung des Nutzers momentan nicht verwendet.
 
 # 5. Soll und Ist Vergleich
 
-Wir haben zu Beginn des Projektes folgende Must-Haves festgelegt:
+Wir haben zu Beginn des Projektes folgende Punkte als Must-Haves festgelegt:
 
-    Projekte können erstellt, verändert (Namen z.B. wenn ein Typo gemacht wurde), und gelöscht werden
-    Ein Projekt umfasst mehrere Aufgaben, sowie Zeitangaben wie Start- und Enddatum. Ein Projekt hat einen Namen. Ein Notiz oder Detailsfeld.
-    User können Projekten zugewiesen werden
-    User können Aufgaben in Projekten erstellen, ändern und löschen und als abgeschlossen markieren.
-    Verschiedene Benutzerrollen (Projektmanager, User / Mitarbeiter, Admins)
-    Admins haben alle Rechte von Managern und können Rechte vergeben ( Aufstieg von Usern zu Managern und andersherum)
+1. Projekte können erstellt, verändert (Namen z.B. wenn ein Typo gemacht wurde), und gelöscht werden
+2. Ein Projekt umfasst mehrere Aufgaben, sowie Zeitangaben wie Start- und Enddatum. Ein Projekt hat einen Namen. Ein
+   Notiz oder Detailsfeld.
+3. User können Aufgaben zugewiesen werden
+4. User können Aufgaben in Projekten erstellen, ändern und löschen und als abgeschlossen markieren.
+5. Verschiedene Benutzerrollen (Projektmanager, User / Mitarbeiter, Admins)
+6. Admins haben alle Rechte von Managern und können Rechte vergeben ( Aufstieg von Usern zu Managern und andersherum)
 
-Nice-To-Haves
+Unsere Nice-To-Haves waren:
 
-    Dark-Mode
-    Ein Basetemplate (z.B. ein Corporate Design) haben
-    Terminkalender
-    Historie
-    Verknüpfungen zu Code-Verwaltungstools (z.B. GitHub)
-    Sprints
+- Dark-Mode
+- Ein Basetemplate (z.B. ein Corporate Design) haben
+- Terminkalender
+- Historie
+- Verknüpfungen zu Code-Verwaltungstools (z.B. GitHub)
+- Sprints
+
+Den ersten Punkt der Must-Haves können wir als vollständig erfüllt sehen. Projekte können neu erstellt werden (siehe
+2.2), aktualisert (siehe 2.3) und gelöscht werden (siehe 2.4).
+
+Der zweite Punkt ist ebenso erfolgreich abgeschlossen.
+Projekte beinhalten verschiedene Aufgaben, welche wiederum selbst erstellt (siehe 2.6), bearbeitet (siehe 2.7) und
+gelöscht (siehe 2.8) werden können.
+
+Das Modell des Projekts enthält dabei selbst keine Beziehung zum Model Tasks. Die Beziehung wird vielmehr über den
+Fremdschlüssel im Model Task abgebildet. Die Beziehung zum Owner des Projektes wird über einen Fremdschlüssel zur User
+Tabelle dargestellt. Der Owner des Projektes kann daher beim Erstellen eines Projektes aus der Liste der gespeicherten
+Nutzer ausgweählt und zugewiesen werden.
+
+Das Zuweisen von Usern zu Aufgaben, das dritte Must-Have haben wir ebenfalls implementiert. Während einem Projekt nur
+ein Besitzer zugewisen werden kann, ist die Beziehung zwischen Task und User im Model jeweils als many-to-many beziehung
+angelegt.
+Dies sorgt für eine etwas anspruchsvollere Behandlung der Beziehungen, vor allem bei der Darstellung auf der Task
+Übersichtsseite.
+Dort werden sowohl alle Tasks eines Projektes, als auch alle Mitarbeitenden des jeweiligen Tasks dargestellt. Das
+Zuweisen von Nutzern zu Tasks kann sowohl direkt beim Erstellen als auch später bei Änderungen eines Tasks passieren.
+Ebenso ist es möglich Nutzer wieder von einem Task zu enfernen.
+
+Viertens wollten wir das erstellen, ändern, löschen und als Abgeschlossen markieren von Aufgaben (Tasks) ermöglichen.
+Auch das ist uns in vollem Ummfang gelungen. Dabei kann ein Task sowohl auf der Task Übersicht Seite mit einem Toggle
+als abeschlossen markiert werden als auch über das Formular zum Ändern von Tasks.
+
+
+
+
+
+
 
 
 

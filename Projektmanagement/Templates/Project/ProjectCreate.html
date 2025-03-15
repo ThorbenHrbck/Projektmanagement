@@ -1,16 +1,18 @@
-    <!-- templates/Project/ProjectCreate.html -->
-    {% extends "baseTemplate.html" %}
+<!-- templates/Project/ProjectCreate.html -->
+{% extends "baseTemplate.html" %}
 
-    {% block content %}
+{% block content %}
     <div>
         <h1 style="margin-left: 41%;">Create a project</h1>
         <form method="post" action="{% url 'project_create_submission' %}">
             {% csrf_token %}
-            {%include "Project/ProjectTextFields.html"%}
+            {% include "Project/ProjectTextFields.html" %}
             <div class="FormContainer">
                 <button type="submit" style="margin-left: 42.8%;">Create</button>
-                <a href="{% url 'project_overview' %}" class="button" style="margin-left: 22.4%;">Cancel</a>
+                <a href="{% url 'project_overview' %}" class="button" style="margin-left: 22.4%;">
+                    <button>Cancel</button>
+                </a>
             </div>
         </form>
     </div>
-    {% endblock %}
+{% endblock %}
