@@ -12,8 +12,8 @@
         <form method="post" action="{% url 'project_delete_submission' project.id %}">
             {% csrf_token %}
             <p class="PCentered">Möchten Sie das Projekt {{project.name}} wirklich löschen?</p>
-            <button type="submit" style="margin-left: 35%;">Löschen</button>
-            <button type="submit" style="margin-left: 10%;">Abbrechen</button>
+            <button type="submit" style="margin-left: 35%;">Delete</button>
+            <a href="{% url 'project_overview' %}" class="button" style="margin-left: 22.4%;">Cancel</a>
         </form>
     </div>
 </div>

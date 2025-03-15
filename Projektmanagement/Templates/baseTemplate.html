@@ -38,7 +38,7 @@
             <!-- Logout button -->
             <form method="post" action="{% url 'logout' %}">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-danger">Logout</button>
+                <button type="submit" class="btn btn-danger" style="margin-right: 5px;">Logout</button>
             </form>
         </div>
         {% block content %}
