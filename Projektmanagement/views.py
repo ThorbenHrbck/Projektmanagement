@@ -7,6 +7,9 @@ from Projektmanagement.models import Task, Project, User
 
 
 def main_view(request):
+    destination = request.GET.get('destination')
+    if destination and destination != "default":
+        return redirect(destination)
     return render(request, 'baseTemplate.html')
 
 
