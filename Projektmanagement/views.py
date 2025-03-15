@@ -40,7 +40,7 @@ def project_update(request, project_id):
             return redirect('project_overview')
         except User.DoesNotExist:
             render(request, "error.html")
-    return render(request, "Project/ProjectUpdate.html", {"project": project}, {"users": users})
+    return render(request, "Project/ProjectUpdate.html", {"project": project, "users": users})
 
 
 def project_create(request):
@@ -69,7 +69,7 @@ def project_delete(request, id):
 
 def project_delete_submission(request, id):
     Project.objects.get(id=id).delete()
-    return project_overview(request)
+    return redirect('project_overview')
 
 
 def task_overview(request, project_id):
