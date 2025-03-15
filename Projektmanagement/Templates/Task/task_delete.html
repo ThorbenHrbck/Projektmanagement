@@ -7,7 +7,7 @@
         <form action="{% url 'task_delete' task.id %}" method="post">
             {% csrf_token %}
             <button type="submit">Delete</button>
-            <a href="/tasks/{{ project.id }}">Abort</a>
+            <a href={% url 'tasks_overview' project_id %}>Abort</a>
         </form>
     </div>
 {% endblock %}
