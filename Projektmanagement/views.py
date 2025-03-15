@@ -69,14 +69,6 @@ def project_delete_submission(request, id):
     return project_overview(request)
 
 
-def project_delete_new(request, project_id):
-    project = get_object_or_404(Project, id=project_id)
-    if request.method == "POST":
-        project.delete()
-        return redirect('project_overview')
-    return render(request, 'Project/ProjectDelete.html', {'project': project})
-
-
 def task_overview(request, project_id):
     project = Project.objects.get(id=project_id)
     all_tasks = Task.objects.filter(project=project_id).order_by('created_date')

@@ -37,7 +37,7 @@
                     <option value="{% url 'project_create' %}">Project Create</option>
                     {% if project and project.id %}
                         <option value="{% url 'project_update' project.id %}">Project Update</option>
-                        <option value="{% url 'project_delete_new' project.id %}">Project Delete</option>
+                        <option value="{% url 'project_delete' project.id %}">Project Delete</option>
                     {% endif %}
                 </select>
             </form>
