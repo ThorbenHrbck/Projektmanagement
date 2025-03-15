@@ -139,6 +139,25 @@ wird als Verifizierung des Nutzers momentan nicht verwendet.
 
 # 5. Soll und Ist Vergleich
 
+Wir haben zu Beginn des Projektes folgende Must-Haves festgelegt:
+
+    Projekte können erstellt, verändert (Namen z.B. wenn ein Typo gemacht wurde), und gelöscht werden
+    Ein Projekt umfasst mehrere Aufgaben, sowie Zeitangaben wie Start- und Enddatum. Ein Projekt hat einen Namen. Ein Notiz oder Detailsfeld.
+    User können Projekten zugewiesen werden
+    User können Aufgaben in Projekten erstellen, ändern und löschen und als abgeschlossen markieren.
+    Verschiedene Benutzerrollen (Projektmanager, User / Mitarbeiter, Admins)
+    Admins haben alle Rechte von Managern und können Rechte vergeben ( Aufstieg von Usern zu Managern und andersherum)
+
+Nice-To-Haves
+
+    Dark-Mode
+    Ein Basetemplate (z.B. ein Corporate Design) haben
+    Terminkalender
+    Historie
+    Verknüpfungen zu Code-Verwaltungstools (z.B. GitHub)
+    Sprints
+
+
 
 
 
