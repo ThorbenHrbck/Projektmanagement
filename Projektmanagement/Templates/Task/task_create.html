@@ -9,7 +9,7 @@
     </form>
 
     {% if project %}
-        <p><a href="/tasks/{{ project.id }}">Back to Task Overview</a></p>
+        <p><a href={% url 'tasks_overview' project.id %}>Back to Task Overview</a></p>
     {% else %}
         <p><a href="{% url 'project_overview' %}">Back to Project Overview</a></p>
     {% endif %}

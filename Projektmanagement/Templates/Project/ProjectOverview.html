@@ -1,51 +1,65 @@
 {% extends "baseTemplate.html" %}
 
 {% block content %}
-<style>
-    /* Container für ein einzelnes Projekt */
-    .container {
-        border: 2px solid #000;
-        border-radius: 5px;
-        margin-bottom: 2%;
-        padding: 10px;
-        position: relative;
-    }
-    .row {
-        display: flex;
-        gap: 25%;
-        margin-top: 0.5%;
-    }
-    .text {
-        font-size: 15px;
-        margin: 5px;
-        line-height: 1.5;
-    }
-    .description {
-        overflow: hidden;       /* alles, was über die max. Höhe hinausgeht, wird ausgeblendet */
-        text-overflow: ellipsis;/* optional: fügt "..." am Ende hinzu */
-        white-space: nowrap;    /* optional: zeigt die Beschreibung in einer einzigen Zeile an */
-    }
-    /* Der klickbare Bereich für Projektdetails */
-    .project-link {
-        display: block;
-        text-decoration: none;
-        color: inherit;
-        /* Optional: beim Hover visuell hervorheben */
-    }
-    /* Bereich für die Aktions-Buttons (Update, Delete) */
-    .action-buttons {
-        margin-top: 10px;
-        display: flex;
-        gap: 10px;
-    }
-</style>
-<div>
-    {% include 'Project/Button.html' %}
-    <!-- Projektliste -->
-    {% for project in projects %}
-        {% if forloop.counter0|divisibleby:"3" %}
-            <div class="row">
-        {% endif %}
+    <style>
+
+        .outer-container {
+            gap: 3%;
+            padding: 1%;
+            border: black solid 2px;
+        }
+
+        /* Container für ein einzelnes Projekt */
+        .container {
+            border: 2px solid black;
+            border-radius: 5px;
+            margin: 5%;
+            padding: 10px;
+
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 30% 30% 30%;
+            gap: 5%;
+            margin-top: 0.5%;
+            width: 95%;
+        }
+
+        .text {
+            font-size: 15px;
+            margin: 5px;
+            line-height: 1.5;
+        }
+
+        .description {
+            overflow: hidden; /* alles, was über die max. Höhe hinausgeht, wird ausgeblendet */
+            text-overflow: ellipsis; /* optional: fügt "..." am Ende hinzu */
+            white-space: nowrap; /* optional: zeigt die Beschreibung in einer einzigen Zeile an */
+        }
+
+        /* Der klickbare Bereich für Projektdetails */
+        .project-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            /* Optional: beim Hover visuell hervorheben */
+        }
+
+        /* Bereich für die Aktions-Buttons (Update, Delete) */
+        .action-buttons {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+    <div class="outer-container">
+        {% include 'Project/Button.html' %}
+        <!-- Projektliste -->
+        {% for project in projects %}
+            {% if forloop.counter0|divisibleby:"3" %}
+                <div class="row">
+            {% endif %}
         <div class="container">
             <!-- Klickbarer Bereich: Führt zur Task Overview (tasks_overview erwartet project_id) -->
             <a class="project-link" href="{% url 'tasks_overview' project.id %}">
@@ -54,25 +68,25 @@
                     <p class="text">Start Date: {{ project.start_date }}</p>
                     <p class="text">End Date: {{ project.end_date }}</p>
                     <p class="text">Owner: {{ project.owner }}</p>
-                    <p class="text description">Description: {{ project.notes | truncatechars:20}}</p>
+                    <p class="text description">Description: {{ project.notes | truncatechars:20 }}</p>
                 </div>
             </a>
             <!-- Aktions-Buttons: Update und Delete -->
             <div class="action-buttons">
                 <a href="{% url 'project_update' project.id %}">
-                    <button type="button">Update</button>
+                    <button type="button" style="background: darkseagreen;">Update</button>
                 </a>
                 <a href="{% url 'project_delete' project.id %}">
-                    <button type="button">Delete</button>
+                    <button type="button" style="background: lightcoral;">Delete</button>
                 </a>
             </div>
         </div>
         {% if forloop.counter|divisibleby:"3" or forloop.last %}
             </div>
         {% endif %}
-    {% empty %}
-        <p>Keine Einträge vorhanden.</p>
-    {% endfor %}
-    {% include 'Project/Button.html' %}
-</div>
+        {% empty %}
+            <p>Keine Einträge vorhanden.</p>
+        {% endfor %}
+        {% include 'Project/Button.html' %}
+    </div>
 {% endblock %}

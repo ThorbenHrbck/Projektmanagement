@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Projektmanagement import views
-from django.contrib.auth import views as auth_views # For login / logout
+from django.contrib.auth import views as auth_views  # For login / logout
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
@@ -32,7 +32,6 @@ urlpatterns = [
     path('projects/delete/submission/<int:id>', views.project_delete_submission, name="project_delete_submission"),
     path('task/<int:task_id>', views.task_update, name='task'),
     path('tasks/<int:project_id>', views.task_overview, name='tasks_overview'),
-    path('task/create/', views.task_create, name='task_create'),
     path('task/create/<int:project_id>', views.task_create, name='project_task_create'),
     path('task/delete_page/<int:task_id>', views.task_delete_page, name='task_delete_page'),
     path('task/delete/<int:task_id>', views.task_delete, name='task_delete'),

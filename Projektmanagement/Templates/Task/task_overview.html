@@ -18,17 +18,26 @@
             padding: 10px;
         }
 
+        .task {
+            border: black solid 2px;
+            padding: 2%;
+            border-radius: 5px;
+        }
+
         .update_btn {
+            margin: 2px;
             background: darkseagreen;
         }
 
         .delete_btn {
+            margin: 2px;
             background: lightcoral;
         }
     </style>
 
     <div>
-        <h2 class="center">Task Overview: <a style="color: black" href="/projects">{{ project.name }}</a></h2>
+        <h2 class="center">Task Overview: <a style="color: black"
+                                             href={% url 'project_overview' %}>{{ project.name }}</a></h2>
         <div class="task_button_container">
             {% if tasks.has_previous %}
                 <a style="justify-self: flex-start" href="?page={{ tasks.previous_page_number }}">
@@ -37,7 +46,7 @@
             {% else %}
                 <p></p>
             {% endif %}
-            <a style="justify-self: center" href="/task/create/{{ project.id }}">
+            <a style="justify-self: center" href={% url 'project_task_create' project.id %}>
                 <button>Add Task</button>
             </a>
             {% if tasks.has_next %}
@@ -53,12 +62,6 @@
 
         <div>
             <div class="task_container">
-                <style>
-                    .task {
-                        border: lightslategrey solid 2px;
-                        padding: 2%;
-                    }
-                </style>
                 {% for task in tasks %}
                     <div class="task">
                         <h3>{{ task.task.name }}</h3>
@@ -84,8 +87,13 @@
                     </span>
 
                         <div>
-                            <a class=update_btn href="{% url 'task_update' task.task.id %}">Update</a>
-                            <a class=delete_btn href="{% url 'task_delete_page' task.task.id %}">Delete</a>
+                            <a href="{% url 'task_update' task.task.id %}">
+                                <button class=update_btn>Update</button>
+                            </a>
+
+                            <a href="{% url 'task_delete_page' task.task.id %}">
+                                <button class=delete_btn>Delete</button>
+                            </a>
                         </div>
                     </div>
                 {% endfor %}

@@ -106,17 +106,39 @@ zu erstellen.
 
 ## 2.6 Task erstellen
 
+Diese Seite wird zu einem großen Teil über Djangos ModelForms erstellt. Die benötigten Felder werden dem Formular
+mitgegeben und dann als Eingabefelder gerendert.
+Die einzigen Pflichtfelder dabei sind der Name und das Projekt, so dass auch schon leere Hülsen für das spätere befüllen
+angelegt werden können. Die Mitarbeitenden im Projekt ("Participants") können dabei ebenso wie das Projekt nur aus
+bereits bestehenden Einträgen gewählt werden.
+
 ## 2.7 Task aktualisiern
 
+Auch diese Seite profitiert von Djangos ModelForms. Die Felder werden im der forms.py definiert und dann als bereits vor
+befüllte Eingabefelder gerendert.
+Die einzigen Pflichtfelder dabei sind wieder der Name und das Projekt.
+
 ## 2.8 Task löschen
+
+Bei Anwählen des Löschen Buttons auf der Task Übersichtseite gibt es eine Weiterleitung zu einer Bestätigungsseite.
+Auf dieser muss man das Löschen des Task entweder durch Klick auf den Löschen Button bestätigen oder mit dem Abbruch
+Button zurück auf die Übersichtsseite gehen.
 
 # 3. Django Admin Seite
 
 Um auf die Django Admin-Seite zu kommen, gibt man "http://127.0.0.1:8000/admin/" in der Suchleiste bei laufenden
 Server ein. Die Anmeldedaten für den Admin sind in der "README.md". Auf der Adminseite angekommen, kann man die
-Datenbankeinträge verwalten.
+Datenbankeinträge verwalten. Bei der Django Admin Seite nutzen wir die standardmässig voll integrierte Funktionalität
+von Django.
 
 # 4. Nutzerverwaltung
 
-Die ist momentan leider nicht vollständig implementiert. Anmelden kann man sich momentan nur als admin und das Konto
+Ist momentan leider nicht vollständig implementiert.
+Anmelden kann man sich momentan nur als admin und das Konto
 wird als Verifizierung des Nutzers momentan nicht verwendet.
+
+# 5. Soll und Ist Vergleich
+
+
+
+
