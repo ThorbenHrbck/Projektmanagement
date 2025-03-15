@@ -20,6 +20,11 @@
         margin: 5px;
         line-height: 1.5;
     }
+    .description {
+        overflow: hidden;       /* alles, was über die max. Höhe hinausgeht, wird ausgeblendet */
+        text-overflow: ellipsis;/* optional: fügt "..." am Ende hinzu */
+        white-space: nowrap;    /* optional: zeigt die Beschreibung in einer einzigen Zeile an */
+    }
     /* Der klickbare Bereich für Projektdetails */
     .project-link {
         display: block;
@@ -49,7 +54,7 @@
                     <p class="text">Start Date: {{ project.start_date }}</p>
                     <p class="text">End Date: {{ project.end_date }}</p>
                     <p class="text">Owner: {{ project.owner }}</p>
-                    <p class="text">Description: {{ project.notes }}</p>
+                    <p class="text description">Description: {{ project.notes | truncatechars:20}}</p>
                 </div>
             </a>
             <!-- Aktions-Buttons: Update und Delete -->
