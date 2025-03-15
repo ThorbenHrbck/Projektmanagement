@@ -183,6 +183,15 @@ Viertens wollten wir das erstellen, ändern, löschen und als Abgeschlossen mark
 Auch das ist uns in vollem Ummfang gelungen. Dabei kann ein Task sowohl auf der Task Übersicht Seite mit einem Toggle
 als abeschlossen markiert werden als auch über das Formular zum Ändern von Tasks.
 
+Den fünften Punkt und damit einhergehend den sechsten konnten wir leider nicht komplett erfolgreich abschliessen. Zwar
+gibt es
+einen SuperUser als Admin und über die Django Klassen auch die Option mehrere Admins zu erstellen. Doch die Nutzer moit
+weniger Berechtigungen haben wir leider nicht mehr umsetzen können.
+
+Von den Nice-to-Haves haben wir ein BaseTemplate umgesetzt, welches auf all unseren anderen Template Seiten als
+einheitliches Designgerüst dient. Eine Basis für das Umsetzen von Sprintplanungen in Gestalt eines Models haben wir
+ebenfalls implementiert, die Umsetzung bleibt aber eine Aufgabe für die Zukunft.
+
 
 
 
