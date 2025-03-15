@@ -21,3 +21,6 @@ Diese Datei dient dazu das jedes andere Template ein festgelegten Grundris, mit,
 
 3. Django Admin Seite
 Um auf die Django Admin-Seite zu kommen, gibt man "http://127.0.0.1:8000/admin/" in der Suchleiste bei laufenden Server ein. Die Anmeldedaten für den Admin sind in der "README.md". Auf der Adminseite angekommen, kann man die Datenbankeinträge verwalten.
+
+4. Nutzerverwaltung
+Die ist momentan leider nicht vollständig implementiert. Anmelden kann man sich momentan nur als admin und das Konto wird als Verifizierung des Nutzers momentan nicht verwendet.
