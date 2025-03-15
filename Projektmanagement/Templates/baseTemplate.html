@@ -10,14 +10,14 @@
                 align-items: center; /* Vertikale Zentrierung */
                 justify-content: space-between; /* Abstand zwischen Logo und Titel */
                 padding: 10px;
-                background-color: lightcoral; /* TODO: entfernen - nur für meine Übersicht. Steffi */
+                background-color: lightcoral; /* Nur für Übersicht, kann angepasst werden */
             }
             .top-left-image {
-                width: 80px; /* Breite des Bildes */
-                height: 60px; /* Höhe des Bildes */
+                width: 80px;
+                height: 60px;
             }
             .center {
-                flex-grow: 1; /* Lässt das h2 den verbleibenden Platz nutzen */
+                flex-grow: 1;
                 text-align: center;
                 font-size: 24px;
                 margin: 0;
@@ -29,27 +29,18 @@
             <a href="{% url 'main' %}">
                 <img id="logo" src="{% static 'logo.png' %}" border="1" class="top-left-image">
             </a>
-
-            <select name="view_selecter" id="selecter">
-                <option value="default">Select Site to change to</option>
-                <option value="{% url 'project_overview' %}">Project Overview</option>
-                <option value="{% url 'project_create' %}">Project Create</option>
-                {% if project.id %}
-                    <option value="{% url 'project_update' project.id %}">Project Update</option>
-                {% endif %}
-                {% if project.id %}
-                    <option value="{% url 'project_delete' project.id %}">Project Delete</option>
-                {% endif %}
-              </select>
-              <script>
-                document.getElementById("selecter").addEventListener("change", function() {
-                    let selectedUrl = this.value;
-                    if (selectedUrl) {
-                        window.location.href = selectedUrl;
-                    }
-                });
-                </script>
-
+            <!-- Formular für die Navigation; das Formular wird sofort beim Ändern des Select-Feldes abgesendet -->
+            <form method="get" action="{% url 'main' %}">
+                <select name="destination" onchange="this.form.submit()">
+                    <option value="default">Select Site to change to</option>
+                    <option value="{% url 'project_overview' %}">Project Overview</option>
+                    <option value="{% url 'project_create' %}">Project Create</option>
+                    {% if project and project.id %}
+                        <option value="{% url 'project_update' project.id %}">Project Update</option>
+                        <option value="{% url 'project_delete_new' project.id %}">Project Delete</option>
+                    {% endif %}
+                </select>
+            </form>
             <h2 class="center">Projektmanagement</h2>
 
             <!-- Logout button -->
@@ -59,12 +50,10 @@
             </form>
         </div>
     
-        <!-- Hier wird der spezifische Inhalt der Seiten eingefügt -->
         {% block content %}
         {% endblock %}
         
-        <!-- Optional: Footer -->
-        <footer style="background-color: lightcoral; /* TODO: entfernen - nur für meine Übersicht. Steffi */">
+        <footer style="background-color: lightcoral;">
             <p>&copy; 2025 Projektmanagement</p>
         </footer>
     </body>

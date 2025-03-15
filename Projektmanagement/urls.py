@@ -33,6 +33,11 @@ urlpatterns = [
     path('task/<int:task_id>', views.task_detail, name='task'),
     path('tasks/<int:project_id>', views.task_overview, name='tasks_overview'),
     path('task/create/', views.task_create, name='task_create'),
-    path('user/<int:id>/', views.user_view, name='user'),
+    path('task/create/<int:project_id>', views.task_create, name='project_task_create'),
+    path('task/delete_page/<int:task_id>', views.task_delete_page, name='task_delete_page'),
+    path('task/delete/<int:task_id>', views.task_delete, name='task_delete'),
+    path('task/update/<int:task_id>', views.task_update, name='task_update'),
     path('toggle_completed/<int:task_id>/', views.toggle_completed, name='toggle_completed'),
+    path('user/<int:id>/', views.user_view, name='user'),
+    path('error', views.error, name='error'),
 ]

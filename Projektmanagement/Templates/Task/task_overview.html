@@ -1,0 +1,120 @@
+<!-- templates/Task/TaskOverview.html -->
+{% extends "baseTemplate.html" %}
+{% block content %}
+
+    <style>
+        .task_container {
+            display: grid;
+            grid-template-columns: 30% 30% 30%;
+            gap: 3%;
+            padding: 1%;
+            border: black solid 2px;
+        }
+
+        .task_button_container {
+            display: grid;
+            grid-template-columns:30% 30% 30%;
+            grid-gap: 10px;
+            padding: 10px;
+        }
+
+        .update_btn {
+            background: darkseagreen;
+        }
+
+        .delete_btn {
+            background: lightcoral;
+        }
+    </style>
+
+    <div>
+        <h2 class="center">Task Overview: <a style="color: black" href="/projects">{{ project.name }}</a></h2>
+        <div class="task_button_container">
+            {% if tasks.has_previous %}
+                <a style="justify-self: flex-start" href="?page={{ tasks.previous_page_number }}">
+                    <button><< Previous Tasks</button>
+                </a>
+            {% else %}
+                <p></p>
+            {% endif %}
+            <a style="justify-self: center" href="/task/create/{{ project.id }}">
+                <button>Add Task</button>
+            </a>
+            {% if tasks.has_next %}
+                <a style="justify-self: flex-end" href="?page={{ tasks.next_page_number }}">
+                    <button>Next Tasks >></button>
+                </a>
+            {% else %}
+                <p></p>
+            {% endif %}
+
+        </div>
+        <br>
+
+        <div>
+            <div class="task_container">
+                <style>
+                    .task {
+                        border: lightslategrey solid 2px;
+                        padding: 2%;
+                    }
+                </style>
+                {% for task in tasks %}
+                    <div class="task">
+                        <h3>{{ task.task.name }}</h3>
+                        <div style=>
+                            <div>Starts: {{ task.start_date|date:"d.m.Y" }}</div>
+                            <select name="participants" id="participants">
+                                <option value="default">Participants</option>
+
+                                {% for participant in task.participants %}
+                                    <option value="{% url 'user' participant.id %}">{{ participant.firstName }} {{ participant.lastName }}</option>
+                                {% endfor %}
+                            </select>
+                            <div>Ends: {{ task.end_date|date:"d.m.Y" }}</div>
+                        </div>
+                        <div>Details: <span>{{ task.task.description }}</span></div>
+                        <span class="task-status"
+                              data-task-id="{{ task.task.id }}"
+                                {% if task.task.done %}
+                              class="text-success" style="cursor: pointer;">Done: ✅
+                                {% else %}
+                                    class="text-danger" style="cursor: pointer;">Done: ❌
+                                {% endif %}
+                    </span>
+
+                        <div>
+                            <a class=update_btn href="{% url 'task_update' task.task.id %}">Update</a>
+                            <a class=delete_btn href="{% url 'task_delete_page' task.task.id %}">Delete</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.task-status').forEach(function (statusElement) {
+            statusElement.addEventListener('click', function () {
+                let taskId = statusElement.getAttribute('data-task-id');
+
+                fetch(`/toggle_completed/${taskId}/`, {
+                    method: 'GET',
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.done) {
+                            statusElement.innerHTML = 'Done: ✅';
+                        } else {
+                            statusElement.innerHTML = 'Done: ❌';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+        });
+    </script>
+
+
+{% endblock %}
