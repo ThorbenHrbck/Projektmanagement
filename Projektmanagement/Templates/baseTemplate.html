@@ -3,24 +3,19 @@
 <html>
     <head>
         <title>Projektmanagement</title>
-        <link rel="stylesheet" href="{% static 'styles.css' %}">
         <style>
-            .header-container {
+            .header-container{
                 display: flex;
                 align-items: center; /* Vertikale Zentrierung */
                 justify-content: space-between; /* Abstand zwischen Logo und Titel */
-                padding: 10px;
-                background-color: lightcoral; /* Nur für Übersicht, kann angepasst werden */
             }
-            .top-left-image {
+             .top-left-image {   /* set the size of the logo */
                 width: 80px;
                 height: 60px;
             }
-            .center {
+            .center{    /* Set the style of the Name in the middle of the top div */
                 flex-grow: 1;
                 text-align: center;
-                font-size: 24px;
-                margin: 0;
             }
         </style>
     </head>
@@ -29,25 +24,18 @@
             <a href="{% url 'main' %}">
                 <img id="logo" src="{% static 'logo.png' %}" border="1" class="top-left-image">
             </a>
-            <!-- Formular für die Navigation; das Formular wird sofort beim Ändern des Select-Feldes abgesendet -->
             <form method="get" action="{% url 'main' %}">
                 <select name="destination" onchange="this.form.submit()">
                     <option value="default">Select Site to change to</option>
                     <option value="{% url 'project_overview' %}">Project Overview</option>
                     <option value="{% url 'project_create' %}">Project Create</option>
-                    {% if project and project.id %}
-                        <option value="{% url 'project_update' project.id %}">Project Update</option>
-                        <option value="{% url 'project_delete_new' project.id %}">Project Delete</option>
-                    {% endif %}
                 </select>
             </form>
             <h2 class="center">Projektmanagement</h2>
         </div>
-    
         {% block content %}
         {% endblock %}
-        
-        <footer style="background-color: lightcoral;">
+        <footer>
             <p>&copy; 2025 Projektmanagement</p>
         </footer>
     </body>
