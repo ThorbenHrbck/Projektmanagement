@@ -34,7 +34,7 @@ def project_update(request, project_id):
         project.end_date = request.POST.get("ProjectEndDate")
         project.notes = request.POST.get("ProjectDescription")
         try:
-            user = User.objects.get(firstName=request.POST.get("ProjectOwner").split(" ")[0])
+            user = User.objects.get(id=request.POST.get("ProjectOwner").split(" ")[0])
             project.owner = user
             project.save()
             return redirect('project_overview')
