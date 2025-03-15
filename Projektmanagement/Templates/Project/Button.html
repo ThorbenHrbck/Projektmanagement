@@ -2,12 +2,18 @@
     .global-crud {
         display: flex;
         justify-content: center;
+        gap: 5%; /* fügt einen Abstand zwischen den Buttons hinzu */
     }
 </style>
 <div class="global-crud">
     <a href="{% url 'project_create' %}">
         <button type="button">Add Project</button>
     </a>
+    {% if projects.has_previous %}
+        <a href="?page={{ projects.previous_page_number }}">
+            <button type="button">Previous Projects</button>
+        </a>
+    {% endif %}
     {% if projects.has_next %}
         <a href="?page={{ projects.next_page_number }}">
             <button type="button">Next Projects</button>
