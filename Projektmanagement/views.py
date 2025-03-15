@@ -26,6 +26,7 @@ def project_overview(request):
 
 def project_update(request, project_id):
     project = get_object_or_404(Project, id=project_id)
+    users = User.objects.all()
 
     if request.method == "POST":
         project.name = request.POST.get("ProjectName")
@@ -39,21 +40,23 @@ def project_update(request, project_id):
             return redirect('project_overview')
         except User.DoesNotExist:
             render(request, "error.html")
-    return render(request, "Project/ProjectUpdate.html", {"project": project})
+    return render(request, "Project/ProjectUpdate.html", {"project": project}, {"users": users})
 
 
 def project_create(request):
-    return render(request, 'Project/ProjectCreate.html')
+    users = User.objects.all()
+    return render(request, 'Project/ProjectCreate.html', {"users": users})
 
 
 def project_create_submission(request):
     project_name = request.POST.get("ProjectName")
     project_start_date = request.POST.get("ProjectStartDate")
     project_end_date = request.POST.get("ProjectEndDate")
-    project_owner_name = request.POST.get("ProjectOwner")
+    project_owner_name = request.POST.get("ProjectOwner").split(" ")[0]
+    print(project_owner_name)
     project_description = request.POST.get("ProjectDescription")
     try:
-        user = User.objects.get(firstName=project_owner_name)
+        user = User.objects.get(id=project_owner_name)
         Project.objects.create(name=project_name, start_date=project_start_date, end_date=project_end_date,
                                notes=project_description, owner=user)
     except User.DoesNotExist:

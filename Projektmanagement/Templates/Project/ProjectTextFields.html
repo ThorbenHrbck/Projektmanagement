@@ -12,11 +12,13 @@
 </div>
 <div class="FormContainer">
     <label class="FormLabelContainer">Projektmanager:</label>
-    <input type="text" placeholder="First name" value="{{ project.owner }}" name="ProjectOwner" list="Projectmanagers" class="FormInputContainer" required>
-    <datalist id="Projectmanagers">
-    <option value="A">  
-    <option value="B">
-    </datalist>
+    <select type="text" value="{{ project.owner }}" name="ProjectOwner" class="FormInputContainer" required>
+        {% for user in users %}
+            <option value="{{ user.id }}" {% if project.owner.id == user.id %}selected{% endif %}>
+                {{ user.firstName }} {{ user.lastName }}
+            </option>
+        {% endfor %}
+    </select>
 </div>
 <div class="FormContainer">
     <label class="FormLabelContainer">Description:</label>
