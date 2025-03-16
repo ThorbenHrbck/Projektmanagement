@@ -1,16 +1,24 @@
 # Projekt:
 
+Wir haben uns zur Aufgabe gestellt, ein Projektmanagement Tool in Django zu erstellen. Dieses soll es ermöglichen
+Projekte anzulegen und zu verändern. Zu den Projekten sollen Aufgaben zugewiesen werden können, welche wiederum
+Mitarbeitern zugewiesen werden können.
+Wer welche Funktionen nutzen kann, soll dabei von festgelegten Rollen der Nutzer abhängen.
+Wir nennen im Projekt die Aufgaben "Tasks", die Mitarbeitenden werden je nach Situation als User (z.B.im
+Datenbankmodel), als Participants oder Owner (von Projekten) bezeichnet.
+
 # 1. Basetemplate und Templating
 
-Das BaseTemplate dient dazu, für jedes andere Template einen festgelegten Grundriss zu bieten der die übergreifend für
+Das BaseTemplate dient dazu, für jedes andere Template einen festgelegten Grundriss zu bieten, der die übergreifend für
 alle Seiten benötigten Funktionalitäten mitbringt. Hierbei werden zwei Bereiche festgelegt, ein Kopf- und ein
 Fußbereich.
 Im Kopfbereich (Header) wird ganz links ein Logo angezeigt, welches auch als Link zur Projektübersicht dient.
-Daneben gibt es ein Dropdown um wahlweise auf die Seiten Projektübericht und Projekterstellung zu kommen.
+Daneben gibt es ein Dropdown um wahlweise auf die Seiten "Projektübericht" und "Projekterstellung" zu kommen.
 In der Mitte wird der Name der Applikation angezeigt und rechts gibt es den Logout Button. Im unteren Teil (Footer)
 wurde ein Hinweis auf unsere Creative Commons Lizenz eingefügt.
 
-Zwischen diesen beiden wurde die Tags {% block content %} und {% endblock %} eingefügt, welche damit den Ort zum Laden
+Zwischen diesen beiden Bereichen wurden die Tags {% block content %} und {% endblock %} eingefügt, welche damit den Ort
+zum Laden
 von anderen Templates festlegen.
 Über das {% extends "baseTemplate.html" %} Tag am Anfang von anderen Templates greifen diese auf das Basetemplate zu.
 Allgemein verwenden wir in Templates Tags für Variablen und kleinere Logikanteile.
@@ -26,12 +34,13 @@ z.B. ein
 in der View ausgeführt werden und im context als {'projects': projects} mitgegeben werden
 um im Template als Variable {{projects}} genutzt werden zu können.
 
-Wir haben uns zudem entschieden bei Links in den Templates mit URL Pattern Names zu arbeiten um Redundanzen zu vermeiden
+Wir haben uns zudem entschieden, bei Links in den Templates mit URL-Pattern-Names zu arbeiten um Redundanzen zu
+vermeiden
 und keine Links hardcoden zu müssen. Der Tag dafür sieht dann so aus:
 
         href="{% url 'project_delete' project_id %}"
 
-Wie hier mit der Project Id sind optionale Parameter ganz einfach mit zu geben.
+Wie hier mit der "project_id", können optionale Parameter ganz einfach mitgegeben werden.
 An einigen Stellen verwenden wir die in Django integrierte ModelForms Klasse um Formulare zum eingeben oder ändern von
 Daten nicht in Templates selbst erstellen zu müssen. Diese werden in der View aus den entsprechenden Models erstellt und
 als context an die Templates mit gegeben. Die genaue Art des Rendering kann im Template noch angepasst werden (bei uns
@@ -46,7 +55,7 @@ clicken.
 
 Dient der Übersicht für alle erstellten Projekte. Dabei werden der Name des Projektes als fettgeschriebene Überschrift,
 ausserdem das Start- und Enddatum, Besitzer des Projektes und eine Projektbeschreibung angezeigt. Die
-Projektbeschreibung ist ein Feld mit einer Maximalgröße von 20 Zeichen, damit dessen Größe die Anzeige nihct
+Projektbeschreibung ist ein Feld mit einer Maximalgröße von 20 Zeichen, damit dessen Größe die Anzeige nicht
 beeinflusst.
 Weitere Inhalte werden mit "..." angedeutet. Innerhalb der Anzeige eines einzelnen Projekts gibt es noch einen Update
 und einen Delete Button, welcher
@@ -56,7 +65,7 @@ Sollten mehr als 6 Projekte vorhanden sein werden diese
 nicht auf der gleichen Seite angezeigt, sondern es wird ein Button (siehe 2.1.1) angezeigt, welcher die nächsten
 6 Projekte lädt. Auf der nächsten Seite wird dann auch ein Button zum zurückkehren auf die vorherige Seite angezeigt.
 Neben den Buttons zur Navigation wird ein Button zum erstellen eines Projektes angezeigt, welcher zum Template für diese
-Aufgabe führt. Dazu verwenden wir die Pagination Klasse von Django in views, wodurch dann jeweils nur die angegebene
+Aufgabe führt. Dazu verwenden wir die Pagination-Klasse von Django in der View, wodurch dann jeweils nur die angegebene
 Anzahl
 an Projekten beim rendern der Seite mit gegeben wird.
 
@@ -65,8 +74,8 @@ an Projekten beim rendern der Seite mit gegeben wird.
 Diese Datei wurde erstellt, um ober und unterhalb der Projektansichten in der Projektübersicht die nachfolgend
 beschriebenen Buttons über die von Django gelieferte include option einzubinden und so dopplungen zu vermeiden.
 Dies ist eine html Datei welche die Navigation bei mehreren Projekten ermöglicht. Sollten mehr als 6 Projekte vorhanden
-sein, erscheint ein Button um die nächsten Projekte zu laden und anzuzeigen. Bei dessen betätigen, werden die ersten 6
-nicht mehr, dafür aber die nächsten angezeigt. Auf der "zweiten Seite" wird ein button zum laden der vorherigen Projekte
+sein, erscheint ein Button um die nächsten Projekte zu laden und anzuzeigen. Bei dessen Betätigen, werden die ersten 6
+nicht mehr angezeigt, dafür aber die nächsten. Auf der "zweiten Seite" wird ein Button zum laden der vorherigen Projekte
 erscheinen.
 
 ## 2.2 Projekt erstellen
@@ -90,7 +99,7 @@ Wenn man auf "Delete" drückt, wird der Vorgang endgültig abgeschlossen.
 ## 2.5 Task Übersicht
 
 Diese Seite erscheint wenn man auf der Übersichtsseite der Projekte eines der Projekte anwählt. Auf dieser Seite werden
-die dem Projekt zugeordneten Tasks angezeigt. Die Seite benötigt daher als url Parameter zwingend die Projekt-Id.
+die dem Projekt zugeordneten Tasks angezeigt. Die Seite benötigt daher als URL-Parameter zwingend die Projekt-Id.
 Die geladenen Tasks des Projektes werden in einzelnen Kacheln angezeigt, sortiert nach dem Datum der Erstellung.
 
 Wenn es mehr als 6 Tasks geben sollte, verwenden wir analog zur Projekt Übersichtsseite die Pagination von Django um nur
@@ -120,9 +129,14 @@ Die einzigen Pflichtfelder dabei sind wieder der Name und das Projekt.
 
 ## 2.8 Task löschen
 
-Bei Anwählen des Löschen Buttons auf der Task Übersichtseite gibt es eine Weiterleitung zu einer Bestätigungsseite.
+Bei Anwählen des Löschen Buttons auf der Task-Übersichtseite gibt es eine Weiterleitung zu einer Bestätigungsseite.
 Auf dieser muss man das Löschen des Task entweder durch Klick auf den Löschen Button bestätigen oder mit dem Abbruch
 Button zurück auf die Übersichtsseite gehen.
+
+## 2.9 Error
+
+Als Fallback für nicht funktionierende URL Aufrufe haben wir eine Fehler Seite eingebaut, welche ausser einer kurzen
+Botschaft noch einen Button mit Weiterleitung zu Projekt Übersichtsseite enthält.
 
 # 3. Django Admin Seite
 
