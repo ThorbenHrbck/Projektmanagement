@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator
 from django.http import JsonResponse
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 
 from Projektmanagement.forms import TaskForm, UpdateTaskForm
 from Projektmanagement.models import Task, Project, User
@@ -19,6 +19,7 @@ def login_view(request):
 
 
 def project_overview(request):
+    # all_projects kann nicht mit dem get_list_or_404() aufgerufen werden, da der Paginator mit list nicht zuverlässig funktioniert
     all_projects = Project.objects.all().order_by('id')
     paginator = Paginator(all_projects, 6)
     page_number = request.GET.get('page')
@@ -41,12 +42,12 @@ def project_update(request, project_id):
             project.save()
             return redirect('project_overview')
         except User.DoesNotExist:
-            render(request, "error.html")
+            render(request, "404.html")
     return render(request, "Project/ProjectUpdate.html", {"project": project, "users": users})
 
 
 def project_create(request):
-    users = User.objects.all()
+    users = get_list_or_404(User)
     return render(request, 'Project/ProjectCreate.html', {"users": users})
 
 
@@ -57,12 +58,12 @@ def project_create_submission(request):
     project_owner_name = request.POST.get("ProjectOwner").split(" ")[0]
     project_description = request.POST.get("ProjectDescription")
     try:
-        user = User.objects.get(id=project_owner_name)
+        user = get_object_or_404(User, id=project_owner_name)
         Project.objects.create(name=project_name, start_date=project_start_date, end_date=project_end_date,
                                notes=project_description, owner=user)
     except User.DoesNotExist:
-        render(request, "error.html")
-    return project_create(request)
+        render(request, "404.html")
+    return project_overview(request)
 
 
 def project_delete(request, id):
@@ -148,7 +149,7 @@ def user_view(request, user_id):
 
 
 def error(request):
-    return render(request, 'error.html')
+    return render(request, '404.html')
 
 
 def get_participants(all_tasks):

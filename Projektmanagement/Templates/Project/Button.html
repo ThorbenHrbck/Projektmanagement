@@ -11,12 +11,12 @@
     </a>
     {% if projects.has_previous %}
         <a href="?page={{ projects.previous_page_number }}">
-            <button type="button">Previous Projects</button>
+            <button type="button"> << Previous Projects</button>
         </a>
     {% endif %}
     {% if projects.has_next %}
         <a href="?page={{ projects.next_page_number }}">
-            <button type="button">Next Projects</button>
+            <button type="button">Next Projects >></button>
         </a>
     {% endif %}
 </div>
