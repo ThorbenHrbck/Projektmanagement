@@ -72,8 +72,8 @@ def project_delete(request, id):
     return render(request, 'Project/ProjectDelete.html', {"project": project})
 
 
-def project_delete_submission(request, project_id):
-    Project.objects.get(id=project_id).delete()
+def project_delete_submission(request, id):
+    Project.objects.get(id=id).delete()
     return redirect('project_overview')
 
 
