@@ -136,7 +136,8 @@ Button zurück auf die Übersichtsseite gehen.
 ## 2.9 Error
 
 Als Fallback für nicht funktionierende URL Aufrufe haben wir eine Fehler Seite eingebaut, welche ausser einer kurzen
-Botschaft noch einen Button mit Weiterleitung zu Projekt Übersichtsseite enthält.
+Botschaft noch einen Button mit Weiterleitung zu Projekt Übersichtsseite enthält. Jede HTML Response mit dem Code 404
+führt auf diese Seite.
 
 # 3. Django Admin Seite
 

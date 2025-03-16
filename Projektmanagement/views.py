@@ -29,6 +29,7 @@ def project_overview(request):
 
 def project_update(request, project_id):
     project = get_object_or_404(Project, id=project_id)
+    # users kann nicht mit dem get_list_or_404() aufgerufen werden, da split (Zeile 41) sonst nicht geht
     users = User.objects.all()
 
     if request.method == "POST":
@@ -58,12 +59,12 @@ def project_create_submission(request):
     project_owner_name = request.POST.get("ProjectOwner").split(" ")[0]
     project_description = request.POST.get("ProjectDescription")
     try:
-        user = get_object_or_404(User, id=project_owner_name)
+        user = User.objects.get(id=project_owner_name)
         Project.objects.create(name=project_name, start_date=project_start_date, end_date=project_end_date,
                                notes=project_description, owner=user)
     except User.DoesNotExist:
         render(request, "404.html")
-    return project_overview(request)
+    return project_create(request)
 
 
 def project_delete(request, id):
@@ -71,13 +72,13 @@ def project_delete(request, id):
     return render(request, 'Project/ProjectDelete.html', {"project": project})
 
 
-def project_delete_submission(request, id):
-    Project.objects.get(id=id).delete()
+def project_delete_submission(request, project_id):
+    Project.objects.get(id=project_id).delete()
     return redirect('project_overview')
 
 
 def task_overview(request, project_id):
-    project = Project.objects.get(id=project_id)
+    project = get_object_or_404(Project, id=project_id)
     all_tasks = Task.objects.filter(project=project_id).order_by('created_date')
     combined_tasks = combine_tasks_with_participants(all_tasks)
     paginator = Paginator(combined_tasks, 6)
@@ -102,7 +103,7 @@ def task_update(request, task_id):
 
 def task_create(request, project_id=None):
     if project_id:
-        project = Project.objects.get(id=project_id)
+        project = get_object_or_404(Project, id=project_id)
     else:
         project = None
 
@@ -134,17 +135,14 @@ def task_delete(request, task_id):
 
 
 def toggle_completed(request, task_id):
-    task = Task.objects.get(id=task_id)
+    task = get_object_or_404(Task, id=task_id)
     task.done = not task.done
     task.save()
     return JsonResponse({'done': task.done})
 
 
 def user_view(request, user_id):
-    try:
-        user = User.objects.get(pk=user_id)
-    except User.DoesNotExist:
-        return redirect('error')
+    user = get_object_or_404(User, pk=user_id)
     return user
 
 
@@ -163,6 +161,6 @@ def get_participants(all_tasks):
 def combine_tasks_with_participants(all_tasks):
     result = []
     for task in all_tasks:
-        new_task = {"task": task, "participants": task.participants.all()}
-        result.append(new_task)
+        new_object = {"task": task, "participants": task.participants.all()}
+        result.append(new_object)
     return result
